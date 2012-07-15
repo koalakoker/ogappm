@@ -1,0 +1,9 @@
+*.o
+moc_*.*
+ui_*.*
+Makefile
+OGapp
+OGapp.pro.user
+gapp.ogp
+qrc_*.*
+*.*~
