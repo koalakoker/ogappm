@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GAPP_GUIClass</class>
+ <widget class="QDialog" name="GAPP_GUIClass">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QToolButton" name="propertiesBTN">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open an existing .ogp file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="OGappResources.qrc">
+         <normaloff>:/new/prefix1/folder_open.gif</normaloff>:/new/prefix1/folder_open.gif</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="saveAsBTN">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;SaveAs the current file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="OGappResources.qrc">
+         <normaloff>:/new/prefix1/save.png</normaloff>:/new/prefix1/save.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="previousPage">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Go in the previous page&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="autoRepeat">
+        <bool>true</bool>
+       </property>
+       <property name="autoRaise">
+        <bool>false</bool>
+       </property>
+       <property name="arrowType">
+        <enum>Qt::LeftArrow</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="nextPage">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Go in the next page or create new one&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="autoRepeat">
+        <bool>true</bool>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::InstantPopup</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>false</bool>
+       </property>
+       <property name="arrowType">
+        <enum>Qt::RightArrow</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="setPassword">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set or reset the mani password&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Pass</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="noteIndex">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show the list of pages&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Index</string>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextOnly</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QMyTabWidget" name="noteTab">
+     <property name="acceptDrops">
+      <bool>true</bool>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="elideMode">
+      <enum>Qt::ElideNone</enum>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
+     </property>
+     <property name="tabsClosable">
+      <bool>true</bool>
+     </property>
+     <property name="movable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="pag1">
+      <attribute name="title">
+       <string>Pag1</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QMyPlainTextEdit" name="testo1">
+         <property name="acceptDrops">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pag2">
+      <attribute name="title">
+       <string>Pag2</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QMyPlainTextEdit" name="plainTextEdit_2"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pag3">
+      <attribute name="title">
+       <string>Pag3</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QMyPlainTextEdit" name="plainTextEdit_3"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pag4">
+      <attribute name="title">
+       <string>Pag4</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <widget class="QMyPlainTextEdit" name="plainTextEdit_4"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QMyPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>QMyPlainTextEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QMyTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>QMyTabWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="OGappResources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
