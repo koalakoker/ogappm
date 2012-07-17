@@ -7,7 +7,7 @@
 #include <QMessageBox>
 #include <QStringList>
 
-//#define LINUX_COMPILE
+#define LINUX_COMPILE
 
 #ifdef LINUX_COMPILE
 #include <unistd.h>
