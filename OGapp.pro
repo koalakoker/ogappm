@@ -14,7 +14,9 @@ HEADERS += gapp.h \
     QMyTabWidget.h \
     cnoteindex.h \
     gapp_gui.h \
-    browserlauncer.h
+    browserlauncer.h \
+    aboutdialog.h \
+    defines.h
 SOURCES += gapp.cpp \
     ChangePasswordDiag.cpp \
     QMyFileFunctions.cpp \
@@ -26,11 +28,14 @@ SOURCES += gapp.cpp \
     cnoteindex.cpp \
     gapp_gui.cpp \
     main.cpp \
-    browserlauncer.cpp
+    browserlauncer.cpp \
+    aboutdialog.cpp
 FORMS += gapp.ui \
     ChangePasswordDiag.ui \
     qpassworddiag.ui \
     cnoteindex.ui \
-    gapp_gui.ui
-RESOURCES += OGappResources.qrc
+    gapp_gui.ui \
+    aboutdialog.ui
+RESOURCES += OGappResources.qrc \
+    AboutDialog.qrc
 RC_FILE = gapp.rc

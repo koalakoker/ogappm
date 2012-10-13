@@ -9,6 +9,7 @@
 #include "qpassworddiag.h"
 #include "GCrypt.h"
 #include "QMyFileFunctions.h"
+#include "defines.h"
 
 #include <QFile>
 #include <QTextStream>
@@ -172,7 +173,6 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
 				}
 				else
 				{
-					AfxMessageBox("Password Richiesta!");
 					return false;
 				}
 			}
@@ -193,7 +193,7 @@ bool GAPP_Data::saveData(void)
 	}
 
 	file.write("OGP");
-	int ver = 10; // 1.0
+    int ver = GAP_DATA_VER;
 	writeInt(&file,ver);
 
 	if (m_pass!="")

@@ -2,6 +2,8 @@
 #include "QMyPlainTextEdit.h"
 #include "cnoteindex.h"
 #include "ChangePasswordDiag.h"
+#include "aboutdialog.h"
+#include "defines.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -76,7 +78,9 @@ void GAPP_GUI::updateGUI()
 	ui.noteTab->setCurrentIndex(0);
 
     // Update window title
-    QString title("Open GAPP version 1.0 - NOTES - ");
+    QString title("Open GAPP version ");
+    title.append(PRG_VERSION);
+    title.append (" - NOTES - ");
     QFileInfo fileInfo(p_data->fileName());
     title.append(fileInfo.fileName());
     this->setWindowTitle(title);
@@ -221,4 +225,14 @@ void GAPP_GUI::saveAs()
             }
         }
     }
+}
+
+void GAPP_GUI::on_toolButton_clicked()
+{
+    AboutDialog aboutDlg;
+    QString title("Open GAPP version ");
+    title.append(PRG_VERSION);
+    title.append (" - NOTES - ");
+    aboutDlg.SetAboutTxt(title);
+    aboutDlg.exec();
 }

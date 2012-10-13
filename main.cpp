@@ -42,11 +42,6 @@ int main(int argc, char *argv[])
     	// Gapp GUI
 		GAPP_GUI w;
 
-        //QString title = w.windowTitle();
-        //title.append(" - ");
-        //title.append(file);
-        //w.setWindowTitle(title);
-
         w.addData(&gap_Data);
 		if (update == UPDATE_ON_LOAD)
 		{

@@ -30,6 +30,9 @@ public slots:
 	void openProperties();
     void saveAs();
 
+private slots:
+    void on_toolButton_clicked();
+
 private:
     Ui::GAPP_GUIClass ui;
 
