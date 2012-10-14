@@ -1,7 +1,12 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
+    <qresource prefix="/OGapp/set1">
         <file>properties.png</file>
         <file>folder_open.gif</file>
         <file>save.png</file>
+        <file>Actions arrow left.png</file>
+        <file>Actions arrow right.png</file>
+        <file>password.png</file>
+        <file>Help.png</file>
+        <file>lists.png</file>
     </qresource>
 </RCC>

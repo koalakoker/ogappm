@@ -1,4 +1,5 @@
-#include "gapp_gui.h"
+//#include "gapp_gui.h"
+#include "gappmainwindow.h"
 #include "GAPP_Data.h"
 
 #include <QtGui>
@@ -40,7 +41,8 @@ int main(int argc, char *argv[])
     if (gap_Data.LoadData(file,&update))
     {
     	// Gapp GUI
-		GAPP_GUI w;
+        //GAPP_GUI w;
+        GappMainWindow w;
 
         w.addData(&gap_Data);
 		if (update == UPDATE_ON_LOAD)

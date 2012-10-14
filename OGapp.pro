@@ -3,7 +3,7 @@ TARGET = OGapp
 QT += core \
     gui \
     xml
-HEADERS += gapp.h \
+HEADERS += \
     ChangePasswordDiag.h \
     QMyFileFunctions.h \
     RandY.h \
@@ -13,11 +13,11 @@ HEADERS += gapp.h \
     QMyPlainTextEdit.h \
     QMyTabWidget.h \
     cnoteindex.h \
-    gapp_gui.h \
     browserlauncer.h \
     aboutdialog.h \
-    defines.h
-SOURCES += gapp.cpp \
+    defines.h \
+    gappmainwindow.h
+SOURCES += \
     ChangePasswordDiag.cpp \
     QMyFileFunctions.cpp \
     GCrypt.cpp \
@@ -26,16 +26,16 @@ SOURCES += gapp.cpp \
     QMyPlainTextEdit.cpp \
     QMyTabWidget.cpp \
     cnoteindex.cpp \
-    gapp_gui.cpp \
     main.cpp \
     browserlauncer.cpp \
-    aboutdialog.cpp
-FORMS += gapp.ui \
+    aboutdialog.cpp \
+    gappmainwindow.cpp
+FORMS += \
     ChangePasswordDiag.ui \
     qpassworddiag.ui \
     cnoteindex.ui \
-    gapp_gui.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    gappmainwindow.ui
 RESOURCES += OGappResources.qrc \
     AboutDialog.qrc
 RC_FILE = gapp.rc

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GappMainWindow</class>
+ <widget class="QMainWindow" name="GappMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>666</width>
+    <height>514</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QMyTabWidget" name="noteTab">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>0</y>
+      <width>622</width>
+      <height>429</height>
+     </rect>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
+    </property>
+    <property name="documentMode">
+     <bool>false</bool>
+    </property>
+    <property name="tabsClosable">
+     <bool>true</bool>
+    </property>
+    <property name="movable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="pag1_3">
+     <attribute name="title">
+      <string>Pag1</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_10">
+      <item row="0" column="0">
+       <widget class="QMyPlainTextEdit" name="testo1">
+        <property name="acceptDrops">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="pag2_3">
+     <attribute name="title">
+      <string>Pag2</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_11">
+      <item row="0" column="0">
+       <widget class="QMyPlainTextEdit" name="plainTextEdit_8"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="pag3_3">
+     <attribute name="title">
+      <string>Pag3</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_12">
+      <item row="0" column="0">
+       <widget class="QMyPlainTextEdit" name="plainTextEdit_9"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="pag4_3">
+     <attribute name="title">
+      <string>Pag4</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_13">
+      <item row="0" column="0">
+       <widget class="QMyPlainTextEdit" name="plainTextEdit_10"/>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>666</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_Open"/>
+    <addaction name="action_Save"/>
+    <addaction name="actionS_ave_AS"/>
+   </widget>
+   <widget class="QMenu" name="menu_Note">
+    <property name="title">
+     <string>&amp;Note</string>
+    </property>
+    <addaction name="actionGo_Next_or_create_new"/>
+    <addaction name="actionGo_Previous"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_index"/>
+   </widget>
+   <widget class="QMenu" name="menu_Tools">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="action_Set_or_change_password"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Note"/>
+   <addaction name="menu_Tools"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_Open"/>
+   <addaction name="action_Save"/>
+   <addaction name="separator"/>
+   <addaction name="actionGo_Previous"/>
+   <addaction name="actionGo_Next_or_create_new"/>
+   <addaction name="actionShow_index"/>
+   <addaction name="separator"/>
+   <addaction name="action_Set_or_change_password"/>
+   <addaction name="separator"/>
+   <addaction name="action_About"/>
+  </widget>
+  <action name="action_Open">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/folder_open.gif</normaloff>:/OGapp/set1/folder_open.gif</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="action_Save">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/save.png</normaloff>:/OGapp/set1/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionS_ave_AS">
+   <property name="text">
+    <string>S&amp;ave AS...</string>
+   </property>
+  </action>
+  <action name="actionGo_Next_or_create_new">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/Actions arrow right.png</normaloff>:/OGapp/set1/Actions arrow right.png</iconset>
+   </property>
+   <property name="text">
+    <string>Go &amp;Next or create new</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Right</string>
+   </property>
+  </action>
+  <action name="actionGo_Previous">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/Actions arrow left.png</normaloff>:/OGapp/set1/Actions arrow left.png</iconset>
+   </property>
+   <property name="text">
+    <string>Go &amp;Previous</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Left</string>
+   </property>
+  </action>
+  <action name="action_Set_or_change_password">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/password.png</normaloff>:/OGapp/set1/password.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Set or change password</string>
+   </property>
+  </action>
+  <action name="actionShow_index">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/lists.png</normaloff>:/OGapp/set1/lists.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show &amp;index</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/Help.png</normaloff>:/OGapp/set1/Help.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMyPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>QMyPlainTextEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QMyTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>QMyTabWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="OGappResources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

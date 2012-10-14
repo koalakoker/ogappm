@@ -3,7 +3,7 @@ moc_*.*
 ui_*.*
 Makefile
 OGapp
-OGapp.pro.user
+OGapp.pro.user*
 gapp.ogp
 qrc_*.*
 *.*~
