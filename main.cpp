@@ -20,6 +20,7 @@
 
 int main(int argc, char *argv[])
 {
+    int retVal = 1;
     QApplication a(argc, argv);
 
     // Gapp Data
@@ -40,17 +41,29 @@ int main(int argc, char *argv[])
     int update;
     if (gap_Data.LoadData(file,&update))
     {
-    	// Gapp GUI
-        //GAPP_GUI w;
-        GappMainWindow w;
+        if (update == DATA_CRYPTED_PASSWORD_MATCH)
+        {
+            // Gapp GUI
+            //GAPP_GUI w;
+            GappMainWindow w;
 
-        w.addData(&gap_Data);
-		if (update == UPDATE_ON_LOAD)
-		{
-			w.updateGUI();
-		}
-		w.show();
-		return a.exec();
+            w.addData(&gap_Data);
+            w.updateGUI(); // not in new
+            w.show();
+
+            retVal = a.exec();
+        }
+        if (update == NEW_FILE_TO_BE_CREATED)
+        {
+            // Gapp GUI
+            //GAPP_GUI w;
+            GappMainWindow w;
+
+            w.addData(&gap_Data);
+            w.show();
+
+            retVal = a.exec();
+        }
     }
-    return 1;
+    return retVal;
 }

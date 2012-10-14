@@ -93,6 +93,8 @@ QString txt;
 
 bool GAPP_Data::LoadData(QString fileName,int* retVal)
 {
+    bool returnVal = true;
+    *retVal = ERROR_NOT_HANDLED;
 	m_fileName = fileName;
 	m_notes.clear();
 	QFile file(fileName);
@@ -100,87 +102,121 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
 	{
 		// File will be created on save
 		m_pass = "";
-		*retVal = NO_UPDATE_ON_LOAD;
-		return true;
+        *retVal = NEW_FILE_TO_BE_CREATED;
 	}
-	*retVal = UPDATE_ON_LOAD;
-	if( !file.open( QIODevice::ReadOnly ) )
-	{
-		AfxMessageBox("Failed to open file for reading.");
-		return false;
-	}
-
-	char buff[4];
-	file.read(buff,3);
-	buff[3] = 0;
-	QString type(buff);
-	if (type != "OGP")
-	{
-		AfxMessageBox("Is not valid ogp file format");
-		return false;
-	}
-
-	bool ok;
-	int ver = readInt(&file,&ok);
-	if (!ok)
-	{
-		AfxMessageBox("Is not valid ogp file format");
-		return false;
-	}
-
-	switch (ver)
-	{
-		case 10:
-
-			unsigned int H,L;
-			H = readInt(&file,&ok);
-			if (!ok)
-			{
-				AfxMessageBox("Is not valid ogp file format");
-				return false;
-			}
-			L = readInt(&file,&ok);
-			if (!ok)
-			{
-				AfxMessageBox("Is not valid ogp file format");
-				return false;
-			}
-
-			if (!readQStringList(&file,&m_notes))
-			{
-				AfxMessageBox("Is not valid ogp file format");
-				return false;
-			}
-
-			if ((H!=0) || (L!=0))
-			{
-				QPasswordDiag diag;
-				if (diag.exec() == QDialog::Accepted)
-				{
-					unsigned int H1,L1;
-					m_pass=diag.m_pass();
-					GHashPass((const unsigned char*)m_pass.toAscii().constData(),m_pass.length(),&H1,&L1);
-					if ((H1==H) && (L1==L))
-					{
-						GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
-						GCriptAppunti("d");
-					}
-					else
-					{
-						AfxMessageBox("Password Errata!");
-						return false;
-					}
-				}
-				else
-				{
-					return false;
-				}
-			}
-		break;
-	}
-
-	file.close();
-	return true;
+    else
+    {
+        if( !file.open( QIODevice::ReadOnly ) )
+        {
+            AfxMessageBox("Failed to open file for reading.");
+            *retVal = ERROR_READING_FILE;
+            returnVal = false;
+        }
+        else
+        {
+            char buff[4];
+            file.read(buff,3);
+            buff[3] = 0;
+            QString type(buff);
+            if (type != "OGP")
+            {
+                AfxMessageBox("Is not valid ogp file format");
+                *retVal = ERROR_FILE_NOT_VALID;
+                returnVal = false;
+            }
+            else
+            {
+                bool ok;
+                int ver = readInt(&file,&ok);
+                if (!ok)
+                {
+                    AfxMessageBox("Is not valid ogp file format");
+                    *retVal = ERROR_FILE_NOT_VALID;
+                    returnVal = false;
+                }
+                else
+                {
+                    switch (ver)
+                    {
+                        case 10:
+                        {
+                            unsigned int H,L;
+                            H = readInt(&file,&ok);
+                            if (!ok)
+                            {
+                                AfxMessageBox("Is not valid ogp file format");
+                                *retVal = ERROR_FILE_NOT_VALID;
+                                returnVal = false;
+                            }
+                            else
+                            {
+                                L = readInt(&file,&ok);
+                                if (!ok)
+                                {
+                                    AfxMessageBox("Is not valid ogp file format");
+                                    *retVal = ERROR_FILE_NOT_VALID;
+                                    returnVal = false;
+                                }
+                                else
+                                {
+                                    if (!readQStringList(&file,&m_notes))
+                                    {
+                                        AfxMessageBox("Is not valid ogp file format");
+                                        *retVal = ERROR_FILE_NOT_VALID;
+                                        returnVal = false;
+                                    }
+                                    else
+                                    {
+                                        if ((H!=0) || (L!=0))
+                                        {
+                                            QPasswordDiag diag;
+                                            int retDiag = diag.exec();
+                                            if (retDiag == QDialog::Accepted)
+                                            {
+                                                unsigned int H1,L1;
+                                                m_pass=diag.m_pass();
+                                                GHashPass((const unsigned char*)m_pass.toAscii().constData(),m_pass.length(),&H1,&L1);
+                                                if ((H1==H) && (L1==L))
+                                                {
+                                                    GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
+                                                    GCriptAppunti("d");
+                                                    *retVal = DATA_CRYPTED_PASSWORD_MATCH;
+                                                }
+                                                else
+                                                {
+                                                    AfxMessageBox("Password Errata!");
+                                                    *retVal = ERROR_PASSWORD_ERROR;
+                                                    returnVal = false;
+                                                }
+                                            }
+                                            if (retDiag == QPASSDLG_OPEN)
+                                            {
+                                                *retVal = OPEN_FILE;
+                                            }
+                                            if (retDiag == QPASSDLG_NEWFILE)
+                                            {
+                                                *retVal = NEW_FILE_TO_BE_CREATED;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        {
+                            AfxMessageBox("File is not supported");
+                            *retVal = ERROR_FILE_NOT_VALID;
+                            retVal = false;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        file.close();
+    }
+    return returnVal;
 }
 
 bool GAPP_Data::saveData(void)

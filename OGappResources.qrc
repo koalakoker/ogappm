@@ -8,5 +8,12 @@
         <file>password.png</file>
         <file>Help.png</file>
         <file>lists.png</file>
+        <file>aboutdialog.cpp</file>
+        <file>Actions document new.png</file>
+        <file>Actions document save.png</file>
+        <file>Actions document save as.png</file>
+        <file>Folder document open.png</file>
+        <file>ok.png</file>
+        <file>Cancel.png</file>
     </qresource>
 </RCC>
