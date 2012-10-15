@@ -18,6 +18,7 @@
 #define ERROR_READING_FILE          4
 #define ERROR_FILE_NOT_VALID        5
 #define ERROR_NOT_HANDLED           6
+#define FILE_EXISTING_NO_CRYPTED    7
 
 class GAPP_Data: public QObject {
 	Q_OBJECT

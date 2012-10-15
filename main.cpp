@@ -64,6 +64,10 @@ int main(int argc, char *argv[])
 
             retVal = a.exec();
         }
+        if (update  == OPEN_FILE)
+        {
+
+        }
     }
     return retVal;
 }

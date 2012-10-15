@@ -4,6 +4,6 @@ ui_*.*
 Makefile
 OGapp
 OGapp.pro.user*
-gapp.ogp
+*.ogp
 qrc_*.*
 *.*~

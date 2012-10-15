@@ -131,7 +131,8 @@ void GappMainWindow::on_action_Open_activated()
         // The open new one
         if (p_data->LoadData(fileName[0],&update))
         {
-            if (update == UPDATE_ON_LOAD)
+            if ((update == FILE_EXISTING_NO_CRYPTED) ||
+                (update == DATA_CRYPTED_PASSWORD_MATCH))
             {
                 this->updateGUI();
             }
@@ -154,7 +155,8 @@ void GappMainWindow::on_action_Save_activated()
         int update;
         if (p_data->LoadData(fileName[0],&update))
         {
-            if (update == UPDATE_ON_LOAD)
+            if ((update == FILE_EXISTING_NO_CRYPTED) ||
+                (update == DATA_CRYPTED_PASSWORD_MATCH))
             {
                 this->updateGUI();
             }

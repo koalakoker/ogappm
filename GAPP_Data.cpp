@@ -198,6 +198,10 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                                 *retVal = NEW_FILE_TO_BE_CREATED;
                                             }
                                         }
+                                        else
+                                        {
+                                            *retVal = FILE_EXISTING_NO_CRYPTED;
+                                        }
                                     }
                                 }
                             }
