@@ -200,6 +200,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                         }
                                         else
                                         {
+                                            m_pass = "";
                                             *retVal = FILE_EXISTING_NO_CRYPTED;
                                         }
                                     }
