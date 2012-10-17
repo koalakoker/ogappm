@@ -69,10 +69,29 @@ void GAPP_Data::AfxMessageBox(QString txt)
 
 void GAPP_Data::GCriptAppunti(const char* command)
 {
+    int noteNum = 0;
+    if (command[0]=='c')
+    {
+        m_notesCripted.clear();
+        noteNum = m_notes.count();
+    }
+    if (command[0]=='d')
+    {
+        m_notes.clear();
+        noteNum = m_notesCripted.count();
+    }
 	int i;
-	for (i=0;i<m_notes.count();i++)
+    for (i = 0; i < noteNum; i++)
 	{
-		QString app=m_notes.at(i);
+        QString app;
+        if (command[0]=='c')
+        {
+            app=m_notes.at(i);
+        }
+        if (command[0]=='d')
+        {
+            app=m_notesCripted.at(i);
+        }
 		unsigned int n = app.length();
 		unsigned char* buffer = (unsigned char*)malloc(n);
 		unsigned int j;
@@ -85,7 +104,16 @@ void GAPP_Data::GCriptAppunti(const char* command)
 		{
 			app[j] = buffer[j];
 		}
-		m_notes[i]=app;
+        if (command[0]=='c')
+        {
+            //m_notesCripted[i]=app;
+            m_notesCripted.insert(i,app);
+        }
+        if (command[0]=='d')
+        {
+            //m_notes[i]=app;
+            m_notes.insert(i,app);
+        }
 	}
 }
 
@@ -169,6 +197,8 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                     {
                                         if ((H!=0) || (L!=0))
                                         {
+                                            m_notesCripted = QStringList(m_notes);
+                                            m_notes.clear();
                                             QPasswordDiag diag;
                                             int retDiag = diag.exec();
                                             if (retDiag == QDialog::Accepted)
@@ -195,7 +225,11 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                             }
                                             if (retDiag == QPASSDLG_NEWFILE)
                                             {
-                                                *retVal = NEW_FILE_TO_BE_CREATED;
+                                                *retVal = NEW_FILE;
+                                            }
+                                            if (retDiag != DATA_CRYPTED_PASSWORD_MATCH)
+                                            {
+                                                m_notesCripted.clear();
                                             }
                                         }
                                         else
@@ -246,14 +280,14 @@ bool GAPP_Data::saveData(void)
 
 		writeInt(&file,H);
 		writeInt(&file,L);
+        writeQStringList(&file,m_notesCripted);
 	}
 	else
 	{
 		writeInt(&file,0);
 		writeInt(&file,0);
+        writeQStringList(&file,m_notes);
 	}
-
-	writeQStringList(&file,m_notes);
 
 	file.close();
 	return true;

@@ -76,6 +76,11 @@ void GappMainWindow::updateGUI()
     }
     ui->noteTab->setCurrentIndex(0);
 
+    updateTitle();
+}
+
+void GappMainWindow::updateTitle()
+{
     // Update window title
     QString title("Open GAPP version ");
     title.append(PRG_VERSION);
@@ -129,13 +134,57 @@ void GappMainWindow::on_action_Open_activated()
         updateData();
         p_data->saveData();
         // The open new one
-        if (p_data->LoadData(fileName[0],&update))
+        QString file = fileName[0];
+        do
         {
-            if ((update == FILE_EXISTING_NO_CRYPTED) ||
-                (update == DATA_CRYPTED_PASSWORD_MATCH))
+            p_data->LoadData(file,&update);
+            switch(update)
             {
-                this->updateGUI();
+            case OPEN_FILE:
+                {
+                    QFileDialog* fileDiag = new QFileDialog(NULL,"Open .ogp file","","*.ogp");
+                    if (fileDiag->exec())
+                    {
+                        QStringList fileName = fileDiag->selectedFiles();
+                        file = fileName[0];
+                    }
+                }
+                break;
+            case NEW_FILE:
+                {
+                    QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+                    fileDiag->setAcceptMode(QFileDialog::AcceptSave);
+                    fileDiag->setDefaultSuffix("ogp");
+                    if (fileDiag->exec())
+                    {
+                        QStringList fileName = fileDiag->selectedFiles();
+                        file = fileName[0];
+                    }
+                }
+                break;
             }
+        }
+        while ((update == ERROR_PASSWORD_ERROR) ||
+               (update == NEW_FILE) ||
+               (update == OPEN_FILE));
+        switch (update)
+        {
+        case DATA_CRYPTED_PASSWORD_MATCH:
+        case FILE_EXISTING_NO_CRYPTED:
+            {
+                updateGUI();
+            }
+            break;
+        case NEW_FILE_TO_BE_CREATED:
+            {
+                updateGUI();
+            }
+            break;
+        default:
+            {
+
+            }
+            break;
         }
     }
 }
@@ -153,13 +202,57 @@ void GappMainWindow::on_action_Save_activated()
         p_data->saveData();
         // Data are now cripted so is necessary to re-load to decript
         int update;
-        if (p_data->LoadData(fileName[0],&update))
+        QString file = fileName[0];
+        do
         {
-            if ((update == FILE_EXISTING_NO_CRYPTED) ||
-                (update == DATA_CRYPTED_PASSWORD_MATCH))
+            p_data->LoadData(file,&update);
+            switch(update)
             {
-                this->updateGUI();
+            case OPEN_FILE:
+                {
+                    QFileDialog* fileDiag = new QFileDialog(NULL,"Open .ogp file","","*.ogp");
+                    if (fileDiag->exec())
+                    {
+                        QStringList fileName = fileDiag->selectedFiles();
+                        file = fileName[0];
+                    }
+                }
+                break;
+            case NEW_FILE:
+                {
+                    QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+                    fileDiag->setAcceptMode(QFileDialog::AcceptSave);
+                    fileDiag->setDefaultSuffix("ogp");
+                    if (fileDiag->exec())
+                    {
+                        QStringList fileName = fileDiag->selectedFiles();
+                        file = fileName[0];
+                    }
+                }
+                break;
             }
+        }
+        while ((update == ERROR_PASSWORD_ERROR) ||
+               (update == NEW_FILE) ||
+               (update == OPEN_FILE));
+        switch (update)
+        {
+        case DATA_CRYPTED_PASSWORD_MATCH:
+        case FILE_EXISTING_NO_CRYPTED:
+            {
+                updateGUI();
+            }
+            break;
+        case NEW_FILE_TO_BE_CREATED:
+            {
+                updateGUI();
+            }
+            break;
+        default:
+            {
+
+            }
+            break;
         }
     }
 }

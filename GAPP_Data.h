@@ -11,14 +11,16 @@
 #include <QObject>
 #include <QStringList>
 
-#define DATA_CRYPTED_PASSWORD_MATCH 0
-#define ERROR_PASSWORD_ERROR        1
+#define FILE_EXISTING_NO_CRYPTED    0
+#define DATA_CRYPTED_PASSWORD_MATCH 1
 #define NEW_FILE_TO_BE_CREATED      2
 #define OPEN_FILE                   3
-#define ERROR_READING_FILE          4
-#define ERROR_FILE_NOT_VALID        5
-#define ERROR_NOT_HANDLED           6
-#define FILE_EXISTING_NO_CRYPTED    7
+#define NEW_FILE                    4
+#define ERROR_READING_FILE          5
+#define ERROR_FILE_NOT_VALID        6
+#define ERROR_NOT_HANDLED           7
+#define ERROR_PASSWORD_ERROR        8
+
 
 class GAPP_Data: public QObject {
 	Q_OBJECT
@@ -45,6 +47,7 @@ public:
 
 private:
 	QStringList m_notes;
+    QStringList m_notesCripted;
 
 	QString m_pass;
 	QString m_fileName;

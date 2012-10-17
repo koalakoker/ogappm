@@ -31,7 +31,6 @@ int main(int argc, char *argv[])
     struct passwd *pw = getpwuid(getuid());
     homedir = pw->pw_dir;
     homedir = strcat (homedir,"/OGap/gapp.ogp");
-    printf("%s",homedir);
 #else
     char defaultHomeDir[] = "gapp.ogp";
     homedir = defaultHomeDir;
@@ -39,35 +38,64 @@ int main(int argc, char *argv[])
 
     QString file(homedir);
     int update;
-    if (gap_Data.LoadData(file,&update))
+    do
     {
-        if (update == DATA_CRYPTED_PASSWORD_MATCH)
+        gap_Data.LoadData(file,&update);
+        switch(update)
         {
-            // Gapp GUI
-            //GAPP_GUI w;
+        case OPEN_FILE:
+            {
+                QFileDialog* fileDiag = new QFileDialog(NULL,"Open .ogp file","","*.ogp");
+                if (fileDiag->exec())
+                {
+                    QStringList fileName = fileDiag->selectedFiles();
+                    file = fileName[0];
+                }
+            }
+            break;
+        case NEW_FILE:
+            {
+                QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+                fileDiag->setAcceptMode(QFileDialog::AcceptSave);
+                fileDiag->setDefaultSuffix("ogp");
+                if (fileDiag->exec())
+                {
+                    QStringList fileName = fileDiag->selectedFiles();
+                    file = fileName[0];
+                }
+            }
+            break;
+        }
+    }
+    while ((update == ERROR_PASSWORD_ERROR) ||
+           (update == NEW_FILE) ||
+           (update == OPEN_FILE));
+    switch (update)
+    {
+    case DATA_CRYPTED_PASSWORD_MATCH:
+    case FILE_EXISTING_NO_CRYPTED:
+        {
             GappMainWindow w;
-
             w.addData(&gap_Data);
-            w.updateGUI(); // not in new
+            w.updateGUI();
             w.show();
-
             retVal = a.exec();
         }
-        if (update == NEW_FILE_TO_BE_CREATED)
+        break;
+    case NEW_FILE_TO_BE_CREATED:
         {
-            // Gapp GUI
-            //GAPP_GUI w;
             GappMainWindow w;
-
             w.addData(&gap_Data);
+            w.updateTitle();
             w.show();
-
             retVal = a.exec();
         }
-        if (update  == OPEN_FILE)
+        break;
+    default:
         {
 
         }
+        break;
     }
     return retVal;
 }

@@ -21,6 +21,7 @@ public:
     void closeEvent(QCloseEvent* event);
 
     void updateGUI();
+    void updateTitle();
     void updateData();
 
 public slots:
