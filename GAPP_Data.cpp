@@ -123,12 +123,12 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
 {
     bool returnVal = true;
     *retVal = ERROR_NOT_HANDLED;
-	m_fileName = fileName;
-	m_notes.clear();
 	QFile file(fileName);
 	if (!file.exists())
 	{
 		// File will be created on save
+        m_fileName = fileName;
+        m_notes.clear();
 		m_pass = "";
         *retVal = NEW_FILE_TO_BE_CREATED;
 	}
@@ -210,6 +210,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                                 {
                                                     GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
                                                     GCriptAppunti("d");
+                                                    m_fileName = fileName;
                                                     *retVal = DATA_CRYPTED_PASSWORD_MATCH;
                                                 }
                                                 else
@@ -234,6 +235,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                         }
                                         else
                                         {
+                                            m_fileName = fileName;
                                             m_pass = "";
                                             *retVal = FILE_EXISTING_NO_CRYPTED;
                                         }

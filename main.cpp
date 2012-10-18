@@ -1,4 +1,3 @@
-//#include "gapp_gui.h"
 #include "gappmainwindow.h"
 #include "GAPP_Data.h"
 

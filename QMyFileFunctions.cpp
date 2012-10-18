@@ -108,7 +108,7 @@ bool readQStringList(QFile* file, QStringList* strList)
 	{
 		return false;
 	}
-
+    strList->clear();
 	for (i = 0; i < c; i++)
 	{
 		QString note = readQString(file,&ok);
