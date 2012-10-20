@@ -292,6 +292,25 @@ void GappMainWindow::on_actionShow_index_activated()
 
 void GappMainWindow::on_action_New_activated()
 {
+    // Autosave
+    updateData();
+    p_data->saveData();
+    QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+    fileDiag->setAcceptMode(QFileDialog::AcceptSave);
+    fileDiag->setDefaultSuffix("ogp");
+    if (fileDiag->exec())
+    {
+        QStringList fileName = fileDiag->selectedFiles();
+        p_data->notesRemoveAll();
+        // Set default 4 page empty
+        p_data->notesAdd("");
+        p_data->notesAdd("");
+        p_data->notesAdd("");
+        p_data->notesAdd("");
+        p_data->setFileName(fileName[0]);
+        p_data->setPass("");
+        updateGUI();
+    }
 
 }
 
