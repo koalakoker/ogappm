@@ -64,6 +64,7 @@ void GappMainWindow::updateGUI()
         QMyPlainTextEdit *plainTextEdit = new QMyPlainTextEdit(newPag);
         plainTextEdit->setPlainText(p_data->notesAt(i));
         //plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
+        connect(plainTextEdit,SIGNAL(textChanged()),this,SLOT(noteTextChanged()));
 
         gridLayout->addWidget((QPlainTextEdit*)plainTextEdit, 0, 0, 1, 1);
 
@@ -87,6 +88,19 @@ void GappMainWindow::updateTitle()
     title.append (" - NOTES - ");
     QFileInfo fileInfo(p_data->fileName());
     title.append(fileInfo.fileName());
+    if (p_data->IsCrypted())
+    {
+        title.append(" <Crypted>");
+    }
+    if (p_data->HasModified())
+    {
+        title.append("*");
+        ui->action_Save->setEnabled(true);
+    }
+    else
+    {
+        ui->action_Save->setEnabled(false);
+    }
     this->setWindowTitle(title);
 }
 
@@ -110,6 +124,8 @@ void GappMainWindow::updateData()
 void GappMainWindow::deleteNote(int index)
 {
     ui->noteTab->removeTab(index);
+    updateData();
+    updateTitle();
 }
 
 void GappMainWindow::noteIndexHasChanged(int sel)
@@ -194,74 +210,6 @@ void GappMainWindow::on_action_Open_activated()
     }
 }
 
-void GappMainWindow::on_action_Save_activated()
-{
-    QFileDialog* fileDiag = new QFileDialog(this,"SaveAs .ogp file","","*.ogp");
-    fileDiag->setAcceptMode(QFileDialog::AcceptSave);
-    fileDiag->setDefaultSuffix("ogp");
-    if (fileDiag->exec())
-    {
-        QStringList fileName = fileDiag->selectedFiles();
-        updateData();
-        p_data->setFileName(fileName[0]);
-        p_data->saveData();
-        // Data are now cripted so is necessary to re-load to decript
-        int update;
-        QString file = fileName[0];
-        do
-        {
-            p_data->LoadData(file,&update);
-            switch(update)
-            {
-            case OPEN_FILE:
-                {
-                    QFileDialog* fileDiag = new QFileDialog(NULL,"Open .ogp file","","*.ogp");
-                    if (fileDiag->exec())
-                    {
-                        QStringList fileName = fileDiag->selectedFiles();
-                        file = fileName[0];
-                    }
-                }
-                break;
-            case NEW_FILE:
-                {
-                    QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
-                    fileDiag->setAcceptMode(QFileDialog::AcceptSave);
-                    fileDiag->setDefaultSuffix("ogp");
-                    if (fileDiag->exec())
-                    {
-                        QStringList fileName = fileDiag->selectedFiles();
-                        file = fileName[0];
-                    }
-                }
-                break;
-            }
-        }
-        while ((update == ERROR_PASSWORD_ERROR) ||
-               (update == NEW_FILE) ||
-               (update == OPEN_FILE));
-        switch (update)
-        {
-        case DATA_CRYPTED_PASSWORD_MATCH:
-        case FILE_EXISTING_NO_CRYPTED:
-            {
-                updateGUI();
-            }
-            break;
-        case NEW_FILE_TO_BE_CREATED:
-            {
-                updateGUI();
-            }
-            break;
-        default:
-            {
-
-            }
-            break;
-        }
-    }
-}
-
 void GappMainWindow::on_action_About_activated()
 {
     AboutDialog aboutDlg;
@@ -290,6 +238,7 @@ void GappMainWindow::on_actionGo_Next_or_create_new_activated()
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         QMyPlainTextEdit *plainTextEdit = new QMyPlainTextEdit(newPag);
         plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
+        connect(plainTextEdit,SIGNAL(textChanged()),this,SLOT(noteTextChanged()));
 
         gridLayout->addWidget((QPlainTextEdit*)plainTextEdit, 0, 0, 1, 1);
 
@@ -300,6 +249,9 @@ void GappMainWindow::on_actionGo_Next_or_create_new_activated()
 
         ui->noteTab->addTab(newPag, out);
         ui->noteTab->setCurrentIndex(ui->noteTab->currentIndex()+1);
+
+        updateData();
+        updateTitle();
     }
 }
 
@@ -315,7 +267,8 @@ void GappMainWindow::on_action_Set_or_change_password_activated()
     if (diag.exec() == QDialog::Accepted)
     {
         p_data->setPass(diag.newPassword());
-        AfxInfoBox("Password has been changed.");
+        updateTitle();
+        statusBar()->showMessage("Password has been changed.");
     }
 }
 
@@ -335,4 +288,42 @@ void GappMainWindow::on_actionShow_index_activated()
     diag.setCurSelected(ui->noteTab->currentIndex());
     connect(&diag, SIGNAL(noteIndexHasChanged(int)),this,SLOT(noteIndexHasChanged(int)));
     diag.exec();
+}
+
+void GappMainWindow::on_action_New_activated()
+{
+
+}
+
+void GappMainWindow::on_actionGet_notes_from_file_activated()
+{
+
+}
+
+void GappMainWindow::on_action_Save_activated()
+{
+    updateData();
+    p_data->saveData();
+    updateTitle();
+}
+
+void GappMainWindow::on_actionS_ave_AS_activated()
+{
+    QFileDialog* fileDiag = new QFileDialog(this,"SaveAs .ogp file","","*.ogp");
+    fileDiag->setAcceptMode(QFileDialog::AcceptSave);
+    fileDiag->setDefaultSuffix("ogp");
+    if (fileDiag->exec())
+    {
+        QStringList fileName = fileDiag->selectedFiles();
+        updateData();
+        p_data->setFileName(fileName[0]);
+        p_data->saveData();
+        updateTitle();
+    }
+}
+
+void GappMainWindow::noteTextChanged()
+{
+    updateData();
+    updateTitle();
 }

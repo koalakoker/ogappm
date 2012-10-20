@@ -42,6 +42,9 @@ public:
     QString fileName() {return m_fileName;}
     void setFileName(QString fileName){m_fileName = fileName;}
 
+    bool HasModified(void);
+    bool IsCrypted(void);
+
 	// Debug
 	void AfxMessageBox(QString txt);
 
@@ -51,6 +54,8 @@ private:
 
 	QString m_pass;
 	QString m_fileName;
+
+    bool m_hasModified;
 
 	void GCriptAppunti(const char* command);
 };

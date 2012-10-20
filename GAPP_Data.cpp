@@ -19,17 +19,21 @@
 GAPP_Data::GAPP_Data(QObject *parent)
 : QObject(parent)
 {
-	// TODO Auto-generated constructor stub
-
+    m_hasModified = false;
+    m_notes.clear();
+    m_notesCripted.clear();
+    m_pass = "";
+    m_fileName = "";
 }
 
-GAPP_Data::~GAPP_Data() {
-	// TODO Auto-generated destructor stub
+GAPP_Data::~GAPP_Data()
+{
 }
 
 void GAPP_Data::setPass(QString str)
 {
 	m_pass = str;
+    m_hasModified = true;
 }
 
 QString GAPP_Data::Pass(void)
@@ -54,11 +58,13 @@ void GAPP_Data::notesRemoveAll()
 	{
 		m_notes.removeAt(0);
 	}
+    m_hasModified = true;
 }
 
 void GAPP_Data::notesAdd(QString str)
 {
 	m_notes.append(str);
+    m_hasModified = true;
 }
 
 void GAPP_Data::AfxMessageBox(QString txt)
@@ -117,8 +123,6 @@ void GAPP_Data::GCriptAppunti(const char* command)
 	}
 }
 
-QString txt;
-
 bool GAPP_Data::LoadData(QString fileName,int* retVal)
 {
     bool returnVal = true;
@@ -130,6 +134,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
         m_fileName = fileName;
         m_notes.clear();
 		m_pass = "";
+        m_hasModified = false;
         *retVal = NEW_FILE_TO_BE_CREATED;
 	}
     else
@@ -211,6 +216,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                                     GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
                                                     GCriptAppunti("d");
                                                     m_fileName = fileName;
+                                                    m_hasModified = false;
                                                     *retVal = DATA_CRYPTED_PASSWORD_MATCH;
                                                 }
                                                 else
@@ -237,6 +243,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                         {
                                             m_fileName = fileName;
                                             m_pass = "";
+                                            m_hasModified = false;
                                             *retVal = FILE_EXISTING_NO_CRYPTED;
                                         }
                                     }
@@ -283,14 +290,31 @@ bool GAPP_Data::saveData(void)
 		writeInt(&file,H);
 		writeInt(&file,L);
         writeQStringList(&file,m_notesCripted);
+        m_hasModified = false;
 	}
 	else
 	{
 		writeInt(&file,0);
 		writeInt(&file,0);
         writeQStringList(&file,m_notes);
+        m_hasModified = false;
 	}
 
 	file.close();
 	return true;
+}
+
+bool GAPP_Data::HasModified(void)
+{
+    return m_hasModified;
+}
+
+bool GAPP_Data::IsCrypted(void)
+{
+    bool retVal = false;
+    if (m_pass != "")
+    {
+        retVal = true;
+    }
+    return retVal;
 }

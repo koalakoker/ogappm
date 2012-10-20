@@ -36,6 +36,11 @@ private slots:
     void on_actionGo_Previous_activated();
     void on_action_Set_or_change_password_activated();
     void on_actionShow_index_activated();
+    void on_action_New_activated();
+    void on_actionGet_notes_from_file_activated();
+    void on_actionS_ave_AS_activated();
+
+    void noteTextChanged();
 
 private:
     Ui::GappMainWindow *ui;
