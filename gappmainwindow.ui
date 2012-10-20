@@ -106,7 +106,9 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="action_New"/>
     <addaction name="action_Open"/>
+    <addaction name="actionGet_notes_from_file"/>
     <addaction name="action_Save"/>
     <addaction name="actionS_ave_AS"/>
    </widget>
@@ -147,8 +149,11 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_New"/>
    <addaction name="action_Open"/>
+   <addaction name="actionGet_notes_from_file"/>
    <addaction name="action_Save"/>
+   <addaction name="actionS_ave_AS"/>
    <addaction name="separator"/>
    <addaction name="actionGo_Previous"/>
    <addaction name="actionGo_Next_or_create_new"/>
@@ -161,7 +166,7 @@
   <action name="action_Open">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/folder_open.gif</normaloff>:/OGapp/set1/folder_open.gif</iconset>
+     <normaloff>:/OGapp/set1/icons/Folder document open.png</normaloff>:/OGapp/set1/icons/Folder document open.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -173,7 +178,7 @@
   <action name="action_Save">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/save.png</normaloff>:/OGapp/set1/save.png</iconset>
+     <normaloff>:/OGapp/set1/icons/Actions document save.png</normaloff>:/OGapp/set1/icons/Actions document save.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Save</string>
@@ -183,6 +188,10 @@
    </property>
   </action>
   <action name="actionS_ave_AS">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/icons/Actions document save as.png</normaloff>:/OGapp/set1/icons/Actions document save as.png</iconset>
+   </property>
    <property name="text">
     <string>S&amp;ave AS...</string>
    </property>
@@ -190,7 +199,7 @@
   <action name="actionGo_Next_or_create_new">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/Actions arrow right.png</normaloff>:/OGapp/set1/Actions arrow right.png</iconset>
+     <normaloff>:/OGapp/set1/icons/Actions arrow right.png</normaloff>:/OGapp/set1/icons/Actions arrow right.png</iconset>
    </property>
    <property name="text">
     <string>Go &amp;Next or create new</string>
@@ -202,7 +211,7 @@
   <action name="actionGo_Previous">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/Actions arrow left.png</normaloff>:/OGapp/set1/Actions arrow left.png</iconset>
+     <normaloff>:/OGapp/set1/icons/Actions arrow left.png</normaloff>:/OGapp/set1/icons/Actions arrow left.png</iconset>
    </property>
    <property name="text">
     <string>Go &amp;Previous</string>
@@ -214,7 +223,7 @@
   <action name="action_Set_or_change_password">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/password.png</normaloff>:/OGapp/set1/password.png</iconset>
+     <normaloff>:/OGapp/set1/icons/password.png</normaloff>:/OGapp/set1/icons/password.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Set or change password</string>
@@ -223,7 +232,7 @@
   <action name="actionShow_index">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/lists.png</normaloff>:/OGapp/set1/lists.png</iconset>
+     <normaloff>:/OGapp/set1/icons/lists.png</normaloff>:/OGapp/set1/icons/lists.png</iconset>
    </property>
    <property name="text">
     <string>Show &amp;index</string>
@@ -232,10 +241,34 @@
   <action name="action_About">
    <property name="icon">
     <iconset resource="OGappResources.qrc">
-     <normaloff>:/OGapp/set1/Help.png</normaloff>:/OGapp/set1/Help.png</iconset>
+     <normaloff>:/OGapp/set1/icons/Help.png</normaloff>:/OGapp/set1/icons/Help.png</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="action_New">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/icons/Actions document new.png</normaloff>:/OGapp/set1/icons/Actions document new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionGet_notes_from_file">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/icons/Folder new.png</normaloff>:/OGapp/set1/icons/Folder new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Import from file</string>
+   </property>
+   <property name="toolTip">
+    <string>Selectively import notes from file</string>
    </property>
   </action>
  </widget>

@@ -177,6 +177,11 @@ void GappMainWindow::on_action_Open_activated()
             break;
         case NEW_FILE_TO_BE_CREATED:
             {
+                // Set default 4 page empty
+                p_data->notesAdd("");
+                p_data->notesAdd("");
+                p_data->notesAdd("");
+                p_data->notesAdd("");
                 updateGUI();
             }
             break;
@@ -264,6 +269,7 @@ void GappMainWindow::on_action_About_activated()
     title.append(PRG_VERSION);
     title.append (" - NOTES - ");
     aboutDlg.SetAboutTxt(title);
+    aboutDlg.SetIconAuthorTxt("Icon Author: Saki (Alexandre Moore)\nHomePage: http://sa-ki.deviantart.com\nLicense: Free for non-commercial use.\n\nShimmer Icons - Free Set\nIcon Design by Creative Freedom\nhttp://www.creativefreedom.co.uk/icon-design/\nAll copyright for Shimmer Icons belongs to Creative Freedom Ltd.\nhttp://creativecommons.org/licenses/by-nd/3.0/\n\nDowloaded from http://www.veryicon.com");
     aboutDlg.exec();
 }
 

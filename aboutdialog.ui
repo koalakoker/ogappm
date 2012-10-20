@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string/>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -126,7 +126,7 @@ p, li { white-space: pre-wrap; }
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="AboutDialog.qrc">:/new/prefix1/KoalaLogo2.gif</pixmap>
+    <pixmap resource="AboutDialog.qrc">:/new/prefix1/icons/KoalaLogo2.gif</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -148,7 +148,7 @@ p, li { white-space: pre-wrap; }
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="AboutDialog.qrc">:/new/prefix1/KoalaLogo1.png</pixmap>
+    <pixmap resource="AboutDialog.qrc">:/new/prefix1/icons/KoalaLogo1.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -173,10 +173,23 @@ p, li { white-space: pre-wrap; }
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="AboutDialog.qrc">:/new/prefix1/Copyleft.png</pixmap>
+    <pixmap resource="AboutDialog.qrc">:/new/prefix1/icons/Copyleft.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>525</x>
+     <y>360</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;http://sa-ki.deviantart.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Icons author...&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

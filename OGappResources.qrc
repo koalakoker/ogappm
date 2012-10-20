@@ -1,19 +1,19 @@
 <RCC>
     <qresource prefix="/OGapp/set1">
-        <file>properties.png</file>
-        <file>folder_open.gif</file>
-        <file>save.png</file>
-        <file>Actions arrow left.png</file>
-        <file>Actions arrow right.png</file>
-        <file>password.png</file>
-        <file>Help.png</file>
-        <file>lists.png</file>
-        <file>aboutdialog.cpp</file>
-        <file>Actions document new.png</file>
-        <file>Actions document save.png</file>
-        <file>Actions document save as.png</file>
-        <file>Folder document open.png</file>
-        <file>ok.png</file>
-        <file>Cancel.png</file>
+        <file>icons/Actions arrow left.png</file>
+        <file>icons/Actions arrow right.png</file>
+        <file>icons/Actions document new.png</file>
+        <file>icons/Actions document save.png</file>
+        <file>icons/Actions document save as.png</file>
+        <file>icons/Cancel.png</file>
+        <file>icons/Folder document open.png</file>
+        <file>icons/Folder new.png</file>
+        <file>icons/gapp.ico</file>
+        <file>icons/Help.png</file>
+        <file>icons/lists.png</file>
+        <file>icons/notes.png</file>
+        <file>icons/ok.png</file>
+        <file>icons/password.png</file>
+        <file>icons/properties.png</file>
     </qresource>
 </RCC>
