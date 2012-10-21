@@ -43,7 +43,18 @@ QString GAPP_Data::Pass(void)
 
 int GAPP_Data::notesCount()
 {
-	return m_notes.count();
+    int noteCount = m_notes.count();
+    int noteCryptCount = m_notesCripted.count();
+    int retVal;
+    if (noteCount > noteCryptCount)
+    {
+        retVal = noteCount;
+    }
+    else
+    {
+        retVal = noteCryptCount;
+    }
+    return retVal;
 }
 
 QString GAPP_Data::notesAt(int i)
@@ -267,6 +278,134 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
     return returnVal;
 }
 
+bool GAPP_Data::LoadDataOffline(QString fileName,int* retVal,QString userPass)
+{
+    bool returnVal = true;
+    *retVal = ERROR_NOT_HANDLED;
+    QFile file(fileName);
+    if (!file.exists())
+    {
+        // File will be created on save
+        m_fileName = fileName;
+        m_notes.clear();
+        m_pass = "";
+        m_hasModified = false;
+        *retVal = NEW_FILE_TO_BE_CREATED;
+    }
+    else
+    {
+        if( !file.open( QIODevice::ReadOnly ) )
+        {
+            *retVal = ERROR_READING_FILE;
+            returnVal = false;
+        }
+        else
+        {
+            char buff[4];
+            file.read(buff,3);
+            buff[3] = 0;
+            QString type(buff);
+            if (type != "OGP")
+            {
+                *retVal = ERROR_FILE_NOT_VALID;
+                returnVal = false;
+            }
+            else
+            {
+                bool ok;
+                int ver = readInt(&file,&ok);
+                if (!ok)
+                {
+                    *retVal = ERROR_FILE_NOT_VALID;
+                    returnVal = false;
+                }
+                else
+                {
+                    switch (ver)
+                    {
+                        case 10:
+                        {
+                            unsigned int H,L;
+                            H = readInt(&file,&ok);
+                            if (!ok)
+                            {
+                                *retVal = ERROR_FILE_NOT_VALID;
+                                returnVal = false;
+                            }
+                            else
+                            {
+                                L = readInt(&file,&ok);
+                                if (!ok)
+                                {
+                                    *retVal = ERROR_FILE_NOT_VALID;
+                                    returnVal = false;
+                                }
+                                else
+                                {
+                                    if (!readQStringList(&file,&m_notes))
+                                    {
+                                        *retVal = ERROR_FILE_NOT_VALID;
+                                        returnVal = false;
+                                    }
+                                    else
+                                    {
+                                        if ((H!=0) || (L!=0))
+                                        {
+                                            m_notesCripted = QStringList(m_notes);
+                                            m_notes.clear();
+
+                                            if (userPass != "")
+                                            {
+                                                unsigned int H1,L1;
+                                                m_pass=userPass;
+                                                GHashPass((const unsigned char*)m_pass.toAscii().constData(),m_pass.length(),&H1,&L1);
+                                                if ((H1==H) && (L1==L))
+                                                {
+                                                    GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
+                                                    GCriptAppunti("d");
+                                                    m_fileName = fileName;
+                                                    m_hasModified = false;
+                                                    *retVal = DATA_CRYPTED_PASSWORD_MATCH;
+                                                }
+                                                else
+                                                {
+                                                    *retVal = ERROR_PASSWORD_ERROR;
+                                                    returnVal = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                *retVal = ERROR_PASSWORD_ERROR;
+                                                returnVal = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            m_fileName = fileName;
+                                            m_pass = "";
+                                            m_hasModified = false;
+                                            *retVal = FILE_EXISTING_NO_CRYPTED;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        {
+                            *retVal = ERROR_FILE_NOT_VALID;
+                            retVal = false;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        file.close();
+    }
+    return returnVal;
+}
+
 bool GAPP_Data::saveData(void)
 {
 	QFile file( m_fileName );
@@ -317,4 +456,19 @@ bool GAPP_Data::IsCrypted(void)
         retVal = true;
     }
     return retVal;
+}
+
+void GAPP_Data::NotePreview(QStringList* previewList)
+{
+    previewList->clear();
+    int i;
+    for (i = 0; i < m_notes.count(); i++)
+    {
+        QString out;
+        out.sprintf("Pag%d:",i+1);
+        QString previewStr = m_notes.at(i);
+        QStringList previewStrList = previewStr.split('\n');
+        out.append(previewStrList.at(0));
+        previewList->append(out);
+    }
 }

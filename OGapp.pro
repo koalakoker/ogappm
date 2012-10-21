@@ -16,7 +16,8 @@ HEADERS += \
     browserlauncer.h \
     aboutdialog.h \
     defines.h \
-    gappmainwindow.h
+    gappmainwindow.h \
+    qmyfiledialog.h
 SOURCES += \
     ChangePasswordDiag.cpp \
     QMyFileFunctions.cpp \
@@ -29,7 +30,8 @@ SOURCES += \
     main.cpp \
     browserlauncer.cpp \
     aboutdialog.cpp \
-    gappmainwindow.cpp
+    gappmainwindow.cpp \
+    qmyfiledialog.cpp
 FORMS += \
     ChangePasswordDiag.ui \
     qpassworddiag.ui \

@@ -141,10 +141,11 @@ void GappMainWindow::AfxInfoBox(QString txt)
 
 void GappMainWindow::on_action_Open_activated()
 {
-    QFileDialog* fileDiag = new QFileDialog(this,"Open .ogp file","","*.ogp");
-    if (fileDiag->exec())
+    m_fileDiag = new QMyFileDialog(this,"Open .ogp file","","*.ogp");
+    connect(m_fileDiag,SIGNAL(currentChanged(QString)),this,SLOT(getFileInfo(QString)));
+    if (m_fileDiag->exec())
     {
-        QStringList fileName = fileDiag->selectedFiles();
+        QStringList fileName = m_fileDiag->selectedFiles();
         int update;
         // Fist save old datas
         updateData();
@@ -208,6 +209,8 @@ void GappMainWindow::on_action_Open_activated()
             break;
         }
     }
+    delete m_fileDiag;
+    m_fileDiag = NULL;
 }
 
 void GappMainWindow::on_action_About_activated()
@@ -345,4 +348,44 @@ void GappMainWindow::noteTextChanged()
 {
     updateData();
     updateTitle();
+}
+
+void GappMainWindow::getFileInfo(QString fileName)
+{
+    QStringList fileInfo;
+    fileInfo.append("File info");
+    QString out;
+    out = "Path: ";
+    out.append(fileName);
+    fileInfo.append(out);
+    GAPP_Data dataFileChk;
+    int retVal;
+    dataFileChk.LoadDataOffline(fileName,&retVal,"");
+    if (retVal == ERROR_READING_FILE)
+    {
+        fileInfo.append("Not valid or supported file");
+    }
+    else if (retVal == ERROR_PASSWORD_ERROR)
+    {
+        /* File is crypted */
+        QString num;
+        num.setNum(dataFileChk.notesCount());
+        out = "Number of pages:";
+        out.append(num);
+        fileInfo.append(out);
+        fileInfo.append("File is crypted");
+    }
+    else
+    {
+        /* File is not crypted */
+        QString num;
+        num.setNum(dataFileChk.notesCount());
+        out = "Number of pages:";
+        out.append(num);
+        fileInfo.append(out);
+        QStringList previewList;
+        dataFileChk.NotePreview(&previewList);
+        fileInfo.append(previewList);
+    }
+    m_fileDiag->UpdateFileInfo(fileInfo);
 }

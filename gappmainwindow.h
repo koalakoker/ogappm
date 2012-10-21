@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "GAPP_Data.h"
+#include "qmyfiledialog.h"
 
 
 namespace Ui {
@@ -42,11 +43,15 @@ private slots:
 
     void noteTextChanged();
 
+    void getFileInfo(QString fileName);
+
 private:
     Ui::GappMainWindow *ui;
 
     GAPP_Data* p_data;
     void AfxInfoBox(QString txt);
+
+    QMyFileDialog* m_fileDiag;
 };
 
 #endif // GAPPMAINWINDOW_H

@@ -29,7 +29,10 @@ public:
 	virtual ~GAPP_Data();
 
 	bool LoadData(QString fileName,int* retVal);
+    bool LoadDataOffline(QString fileName,int* retVal,QString userPass);
 	bool saveData(void);
+
+    void NotePreview(QStringList* previewList);
 
 	int notesCount();
 	QString notesAt(int i);
