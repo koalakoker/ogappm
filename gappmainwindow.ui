@@ -6,99 +6,95 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>666</width>
-    <height>514</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QMyTabWidget" name="noteTab">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>0</y>
-      <width>622</width>
-      <height>429</height>
-     </rect>
-    </property>
-    <property name="acceptDrops">
-     <bool>true</bool>
-    </property>
-    <property name="tabPosition">
-     <enum>QTabWidget::North</enum>
-    </property>
-    <property name="tabShape">
-     <enum>QTabWidget::Rounded</enum>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <property name="elideMode">
-     <enum>Qt::ElideNone</enum>
-    </property>
-    <property name="documentMode">
-     <bool>false</bool>
-    </property>
-    <property name="tabsClosable">
-     <bool>true</bool>
-    </property>
-    <property name="movable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="pag1_3">
-     <attribute name="title">
-      <string>Pag1</string>
-     </attribute>
-     <layout class="QGridLayout" name="gridLayout_10">
-      <item row="0" column="0">
-       <widget class="QMyPlainTextEdit" name="testo1">
-        <property name="acceptDrops">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="pag2_3">
-     <attribute name="title">
-      <string>Pag2</string>
-     </attribute>
-     <layout class="QGridLayout" name="gridLayout_11">
-      <item row="0" column="0">
-       <widget class="QMyPlainTextEdit" name="plainTextEdit_8"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="pag3_3">
-     <attribute name="title">
-      <string>Pag3</string>
-     </attribute>
-     <layout class="QGridLayout" name="gridLayout_12">
-      <item row="0" column="0">
-       <widget class="QMyPlainTextEdit" name="plainTextEdit_9"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="pag4_3">
-     <attribute name="title">
-      <string>Pag4</string>
-     </attribute>
-     <layout class="QGridLayout" name="gridLayout_13">
-      <item row="0" column="0">
-       <widget class="QMyPlainTextEdit" name="plainTextEdit_10"/>
-      </item>
-     </layout>
-    </widget>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QMyTabWidget" name="noteTab">
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="pag1_3">
+       <attribute name="title">
+        <string>Pag1</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0">
+         <widget class="QMyPlainTextEdit" name="testo1">
+          <property name="acceptDrops">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pag2_3">
+       <attribute name="title">
+        <string>Pag2</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="0">
+         <widget class="QMyPlainTextEdit" name="plainTextEdit_8"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pag3_3">
+       <attribute name="title">
+        <string>Pag3</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="0" column="0">
+         <widget class="QMyPlainTextEdit" name="plainTextEdit_9"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pag4_3">
+       <attribute name="title">
+        <string>Pag4</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <item row="0" column="0">
+         <widget class="QMyPlainTextEdit" name="plainTextEdit_10"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>666</width>
+     <width>800</width>
      <height>25</height>
     </rect>
    </property>
