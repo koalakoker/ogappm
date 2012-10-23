@@ -465,10 +465,29 @@ void GAPP_Data::NotePreview(QStringList* previewList)
     for (i = 0; i < m_notes.count(); i++)
     {
         QString out;
-        out.sprintf("Pag%d:",i+1);
+        out.sprintf("Pag%d - ",i+1);
         QString previewStr = m_notes.at(i);
         QStringList previewStrList = previewStr.split('\n');
         out.append(previewStrList.at(0));
         previewList->append(out);
+    }
+}
+
+void GAPP_Data::NoteMatchList(bool* matchList,GAPP_Data* noteList)
+{
+    int i;
+    for (i = 0; i <  noteList->notesCount(); i++)
+    {
+        QString noteToBeFound = noteList->notesAt(i);
+        int j;
+        matchList[i] = false;
+        for (j = 0; j < this->notesCount(); j++)
+        {
+            if (noteToBeFound == this->notesAt(j))
+            {
+                matchList[i] = true;
+                continue;
+            }
+        }
     }
 }

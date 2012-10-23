@@ -6,9 +6,9 @@
 #include "ChangePasswordDiag.h"
 #include "aboutdialog.h"
 #include "defines.h"
-
+#include "qmyfiledialog.h"
+#include "noteselection.h"
 #include <QMessageBox>
-#include <QFileDialog>
 
 GappMainWindow::GappMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -141,11 +141,10 @@ void GappMainWindow::AfxInfoBox(QString txt)
 
 void GappMainWindow::on_action_Open_activated()
 {
-    m_fileDiag = new QMyFileDialog(this,"Open .ogp file","","*.ogp");
-    connect(m_fileDiag,SIGNAL(currentChanged(QString)),this,SLOT(getFileInfo(QString)));
-    if (m_fileDiag->exec())
+    QMyFileDialog* fileDiag = new QMyFileDialog(this,"Open .ogp file","","*.ogp");
+    if (fileDiag->exec())
     {
-        QStringList fileName = m_fileDiag->selectedFiles();
+        QStringList fileName = fileDiag->selectedFiles();
         int update;
         // Fist save old datas
         updateData();
@@ -159,24 +158,31 @@ void GappMainWindow::on_action_Open_activated()
             {
             case OPEN_FILE:
                 {
-                    QFileDialog* fileDiag = new QFileDialog(NULL,"Open .ogp file","","*.ogp");
+                    QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Open .ogp file","","*.ogp");
                     if (fileDiag->exec())
                     {
                         QStringList fileName = fileDiag->selectedFiles();
                         file = fileName[0];
                     }
+                    delete fileDiag;
                 }
                 break;
             case NEW_FILE:
                 {
-                    QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+                    QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Create new .ogp file","","*.ogp");
                     fileDiag->setAcceptMode(QFileDialog::AcceptSave);
                     fileDiag->setDefaultSuffix("ogp");
                     if (fileDiag->exec())
                     {
                         QStringList fileName = fileDiag->selectedFiles();
                         file = fileName[0];
+                        QFile fileToBeDeleted(file);
+                        if (fileToBeDeleted.exists())
+                        {
+                            fileToBeDeleted.remove();
+                        }
                     }
+                    delete fileDiag;
                 }
                 break;
             }
@@ -195,6 +201,7 @@ void GappMainWindow::on_action_Open_activated()
         case NEW_FILE_TO_BE_CREATED:
             {
                 // Set default 4 page empty
+                p_data->notesRemoveAll();
                 p_data->notesAdd("");
                 p_data->notesAdd("");
                 p_data->notesAdd("");
@@ -209,8 +216,7 @@ void GappMainWindow::on_action_Open_activated()
             break;
         }
     }
-    delete m_fileDiag;
-    m_fileDiag = NULL;
+    delete fileDiag;
 }
 
 void GappMainWindow::on_action_About_activated()
@@ -298,7 +304,7 @@ void GappMainWindow::on_action_New_activated()
     // Autosave
     updateData();
     p_data->saveData();
-    QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+    QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Create new .ogp file","","*.ogp");
     fileDiag->setAcceptMode(QFileDialog::AcceptSave);
     fileDiag->setDefaultSuffix("ogp");
     if (fileDiag->exec())
@@ -314,12 +320,66 @@ void GappMainWindow::on_action_New_activated()
         p_data->setPass("");
         updateGUI();
     }
-
+    delete fileDiag;
 }
 
 void GappMainWindow::on_actionGet_notes_from_file_activated()
 {
+    QMyFileDialog* fileDiag = new QMyFileDialog(this,"Open .ogp file","","*.ogp");
+    if (fileDiag->exec())
+    {
+        QStringList fileName = fileDiag->selectedFiles();
+        // Open
+        GAPP_Data noteToBeImported;
+        int update;
+        do
+        {
+            noteToBeImported.LoadData(fileName[0],&update);
+        }
+        while ((update == ERROR_PASSWORD_ERROR) ||
+               (update == NEW_FILE) ||
+               (update == OPEN_FILE));
+        switch (update)
+        {
+        case DATA_CRYPTED_PASSWORD_MATCH:
+        case FILE_EXISTING_NO_CRYPTED:
+            {
+                noteSelection noteSelDlg;
+                // Fill
+                QStringList previewList;
+                noteToBeImported.NotePreview(&previewList);
+                bool* noteMatchList = new bool(noteToBeImported.notesCount());
+                p_data->NoteMatchList(noteMatchList,&noteToBeImported);
+                noteSelDlg.SetMatchList(noteMatchList);
+                int i;
+                for (i = 0; i < previewList.count(); i++)
+                {
+                    noteSelDlg.AddItem(previewList.at(i),true,!noteMatchList[i]);
+                }
+                if (noteSelDlg.exec())
+                {
+                    // Import selected
+                    noteSelDlg.GetSelectedList(noteMatchList);
+                    for (i = 0; i < noteToBeImported.notesCount(); i++)
+                    {
+                        if (noteMatchList[i])
+                        {
+                            p_data->notesAdd(noteToBeImported.notesAt(i));
+                        }
+                    }
+                    updateGUI();
+                }
+                delete noteMatchList;
+            }
+            break;
+        default:
+            {
 
+            }
+            break;
+        }
+    }
+    delete fileDiag;
 }
 
 void GappMainWindow::on_action_Save_activated()
@@ -331,7 +391,7 @@ void GappMainWindow::on_action_Save_activated()
 
 void GappMainWindow::on_actionS_ave_AS_activated()
 {
-    QFileDialog* fileDiag = new QFileDialog(this,"SaveAs .ogp file","","*.ogp");
+    QMyFileDialog* fileDiag = new QMyFileDialog(this,"SaveAs .ogp file","","*.ogp");
     fileDiag->setAcceptMode(QFileDialog::AcceptSave);
     fileDiag->setDefaultSuffix("ogp");
     if (fileDiag->exec())
@@ -342,50 +402,11 @@ void GappMainWindow::on_actionS_ave_AS_activated()
         p_data->saveData();
         updateTitle();
     }
+    delete fileDiag;
 }
 
 void GappMainWindow::noteTextChanged()
 {
     updateData();
     updateTitle();
-}
-
-void GappMainWindow::getFileInfo(QString fileName)
-{
-    QStringList fileInfo;
-    fileInfo.append("File info");
-    QString out;
-    out = "Path: ";
-    out.append(fileName);
-    fileInfo.append(out);
-    GAPP_Data dataFileChk;
-    int retVal;
-    dataFileChk.LoadDataOffline(fileName,&retVal,"");
-    if (retVal == ERROR_READING_FILE)
-    {
-        fileInfo.append("Not valid or supported file");
-    }
-    else if (retVal == ERROR_PASSWORD_ERROR)
-    {
-        /* File is crypted */
-        QString num;
-        num.setNum(dataFileChk.notesCount());
-        out = "Number of pages:";
-        out.append(num);
-        fileInfo.append(out);
-        fileInfo.append("File is crypted");
-    }
-    else
-    {
-        /* File is not crypted */
-        QString num;
-        num.setNum(dataFileChk.notesCount());
-        out = "Number of pages:";
-        out.append(num);
-        fileInfo.append(out);
-        QStringList previewList;
-        dataFileChk.NotePreview(&previewList);
-        fileInfo.append(previewList);
-    }
-    m_fileDiag->UpdateFileInfo(fileInfo);
 }

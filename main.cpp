@@ -1,8 +1,8 @@
 #include "gappmainwindow.h"
 #include "GAPP_Data.h"
+#include "qmyfiledialog.h"
 
 #include <QtGui>
-#include <QDialog>
 #include <QApplication>
 #include <QMessageBox>
 #include <QStringList>
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         {
         case OPEN_FILE:
             {
-                QFileDialog* fileDiag = new QFileDialog(NULL,"Open .ogp file","","*.ogp");
+                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Open .ogp file","","*.ogp");
                 if (fileDiag->exec())
                 {
                     QStringList fileName = fileDiag->selectedFiles();
@@ -54,13 +54,18 @@ int main(int argc, char *argv[])
             break;
         case NEW_FILE:
             {
-                QFileDialog* fileDiag = new QFileDialog(NULL,"Create new .ogp file","","*.ogp");
+                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Create new .ogp file","","*.ogp");
                 fileDiag->setAcceptMode(QFileDialog::AcceptSave);
                 fileDiag->setDefaultSuffix("ogp");
                 if (fileDiag->exec())
                 {
                     QStringList fileName = fileDiag->selectedFiles();
                     file = fileName[0];
+                    QFile fileToBeDeleted(file);
+                    if (fileToBeDeleted.exists())
+                    {
+                        fileToBeDeleted.remove();
+                    }
                 }
             }
             break;
@@ -83,9 +88,15 @@ int main(int argc, char *argv[])
         break;
     case NEW_FILE_TO_BE_CREATED:
         {
+            // Set default 4 page empty
+            gap_Data.notesRemoveAll();
+            gap_Data.notesAdd("");
+            gap_Data.notesAdd("");
+            gap_Data.notesAdd("");
+            gap_Data.notesAdd("");
             GappMainWindow w;
             w.addData(&gap_Data);
-            w.updateTitle();
+            w.updateGUI();
             w.show();
             retVal = a.exec();
         }

@@ -33,6 +33,7 @@ public:
 	bool saveData(void);
 
     void NotePreview(QStringList* previewList);
+    void NoteMatchList(bool* matchList,GAPP_Data* noteList);
 
 	int notesCount();
 	QString notesAt(int i);

@@ -20,6 +20,9 @@ public slots:
 private:
     QLabel m_fileInfo;
     QSize m_defaultSize;
+
+private slots:
+    void getFileInfo(QString fileName);
 };
 
 #endif // QMYFILEDIALOG_H
