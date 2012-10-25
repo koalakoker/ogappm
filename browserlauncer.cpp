@@ -1,9 +1,6 @@
 #include "browserlauncer.h"
 
-#define LINUX_COMPILE
-//#define WINDOWS_COMPILE
-
-#ifdef WINDOWS_COMPILE
+#ifdef Q_OS_MSDOS
 #include <windows.h>
 #endif
 
@@ -14,14 +11,14 @@ BrowserLauncer::BrowserLauncer(QObject *parent) :
 
 void BrowserLauncer::doWork()
 {
-#ifdef LINUX_COMPILE
+#ifdef Q_OS_LINUX
     // Only under Linux
     QString urlTxt("x-www-browser \"");
     urlTxt.append(m_urlTxt);
     urlTxt.append("\"");
     m_response = system(urlTxt.toLocal8Bit().data());
 #endif
-#ifdef WINDOWS_COMPILE
+#ifdef Q_OS_MSDOS
     WCHAR wStr[1000];
     m_urlTxt.toWCharArray(wStr);
     WCHAR wCmd[100];

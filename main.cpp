@@ -7,9 +7,7 @@
 #include <QMessageBox>
 #include <QStringList>
 
-#define LINUX_COMPILE
-
-#ifdef LINUX_COMPILE
+#ifdef Q_OS_LINUX
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
@@ -26,7 +24,7 @@ int main(int argc, char *argv[])
     GAPP_Data gap_Data;
 
     char *homedir;
-#ifdef LINUX_COMPILE
+#ifdef Q_OS_LINUX
     struct passwd *pw = getpwuid(getuid());
     homedir = pw->pw_dir;
     homedir = strcat (homedir,"/OGap/gapp.ogp");
