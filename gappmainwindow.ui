@@ -116,6 +116,8 @@
     <addaction name="actionGo_Previous"/>
     <addaction name="separator"/>
     <addaction name="actionShow_index"/>
+    <addaction name="action_Find"/>
+    <addaction name="actionF_ind_next"/>
    </widget>
    <widget class="QMenu" name="menu_Tools">
     <property name="title">
@@ -154,6 +156,7 @@
    <addaction name="actionGo_Previous"/>
    <addaction name="actionGo_Next_or_create_new"/>
    <addaction name="actionShow_index"/>
+   <addaction name="action_Find"/>
    <addaction name="separator"/>
    <addaction name="action_Set_or_change_password"/>
    <addaction name="separator"/>
@@ -265,6 +268,26 @@
    </property>
    <property name="toolTip">
     <string>Selectively import notes from file</string>
+   </property>
+  </action>
+  <action name="action_Find">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/icons/Actions search.png</normaloff>:/OGapp/set1/icons/Actions search.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Find</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionF_ind_next">
+   <property name="text">
+    <string>F&amp;ind next</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
  </widget>

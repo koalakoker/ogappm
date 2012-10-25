@@ -41,11 +41,17 @@ private slots:
 
     void noteTextChanged();
 
+    void on_action_Find_activated();
+
+    void on_actionF_ind_next_activated();
+
 private:
     Ui::GappMainWindow *ui;
 
     GAPP_Data* p_data;
     void AfxInfoBox(QString txt);
+
+    QString m_strToBeFind;
 };
 
 #endif // GAPPMAINWINDOW_H

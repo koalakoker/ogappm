@@ -49,6 +49,8 @@ public:
     bool HasModified(void);
     bool IsCrypted(void);
 
+    void FindInNotes(QStringList* resultStrList, QList<int>* noteSelectedList, QList<int>* numFindRequiredList, const QString& strToBefind);
+
 	// Debug
 	void AfxMessageBox(QString txt);
 

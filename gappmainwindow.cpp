@@ -8,6 +8,7 @@
 #include "defines.h"
 #include "qmyfiledialog.h"
 #include "noteselection.h"
+#include "finddialog.h"
 #include <QMessageBox>
 
 GappMainWindow::GappMainWindow(QWidget *parent) :
@@ -15,13 +16,9 @@ GappMainWindow::GappMainWindow(QWidget *parent) :
     ui(new Ui::GappMainWindow)
 {
     ui->setupUi(this);
-
-    this->setWindowFlags(Qt::WindowSystemMenuHint);
     ui->testo1->setFocus();
-
-    // Connection
     connect(ui->noteTab, SIGNAL(tabCloseRequested(int)), this, SLOT(deleteNote(int)));
-
+    m_strToBeFind.clear();;
 }
 
 GappMainWindow::~GappMainWindow()
@@ -409,4 +406,40 @@ void GappMainWindow::noteTextChanged()
 {
     updateData();
     updateTitle();
+}
+
+void GappMainWindow::on_action_Find_activated()
+{
+    FindDialog dlg;
+    // Init
+    dlg.SetData(p_data);
+    dlg.SetStrToBeFind(m_strToBeFind);
+    if (dlg.exec())
+    {
+        // Go to finded note
+        int index = dlg.noteSelected();
+        ui->noteTab->setCurrentIndex(index);
+        QWidget* pag = ui->noteTab->widget(index);
+        QGridLayout* lay = (QGridLayout*)pag->layout();
+        QLayoutItem* layItem = lay->itemAtPosition(0,0);
+        QMyPlainTextEdit* txtNote = (QMyPlainTextEdit*)layItem->widget();
+        m_strToBeFind = dlg.strToBeFind();
+        QTextCursor cursor = txtNote->textCursor();
+        cursor.setPosition(0);
+        txtNote->setTextCursor(cursor);
+        int i;
+        for (i = 0; i < dlg.numFindRequired(); i++)
+        {
+            txtNote->find(m_strToBeFind);
+        }
+    }
+}
+
+void GappMainWindow::on_actionF_ind_next_activated()
+{
+    QWidget* pag = ui->noteTab->currentWidget();
+    QGridLayout* lay = (QGridLayout*)pag->layout();
+    QLayoutItem* layItem = lay->itemAtPosition(0,0);
+    QMyPlainTextEdit* txtNote = (QMyPlainTextEdit*)layItem->widget();
+    txtNote->find(m_strToBeFind);
 }

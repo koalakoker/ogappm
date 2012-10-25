@@ -491,3 +491,35 @@ void GAPP_Data::NoteMatchList(bool* matchList,GAPP_Data* noteList)
         }
     }
 }
+
+void GAPP_Data::FindInNotes(QStringList* resultStrList, QList<int>* noteSelectedList, QList<int>* numFindRequiredList, const QString& strToBefind)
+{
+    resultStrList->clear();
+    noteSelectedList->clear();
+    numFindRequiredList->clear();
+    int i;
+    for (i = 0; i < m_notes.count(); i++)
+    {
+        QString note = m_notes.at(i);
+        QStringList noteRows = note.split("\n");
+        int j;
+        int numFindRequired = 1;
+        for (j = 0; j < noteRows.count(); j++)
+        {
+            QString row = noteRows.at(j);
+            if (row.contains(strToBefind))
+            {
+                QString resultStr;
+                resultStr.sprintf("Pag%d - ",i);
+                resultStr.append(row);
+                resultStrList->append(resultStr);
+                noteSelectedList->append(i);
+                numFindRequiredList->append(numFindRequired);
+                QString tstStr = "@#GAP_BEGIN#@";
+                tstStr.append(row);
+                tstStr.append("@#GAP_END#@");
+                numFindRequired += tstStr.split(strToBefind).count()-1;
+            }
+        }
+    }
+}
