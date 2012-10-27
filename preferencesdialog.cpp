@@ -10,15 +10,11 @@ PreferencesDIalog::PreferencesDIalog(GSettings* pSettings, QWidget *parent) :
     ui->setupUi(this);
 
     this->m_settings = pSettings;
-    ui->DefaultNoteFile->setText(pSettings->Get(GSETTING_DEFNOTEFILE_CFGSTR)->Value().toString());
-    ui->Autosave->setChecked(pSettings->Get(GSETTING_AUTOSAVE_CFGSTR)->Value().toBool());
-    ui->ShowTips->setChecked(pSettings->Get(GSETTING_SHOWTIPS_CFGSTR)->Value().toBool());
-    ui->SaveWinState->setChecked(pSettings->Get(GSETTING_SAVEWINSTATE_CFGSTR)->Value().toBool());
+    UpdateGUI();
 }
 
 PreferencesDIalog::~PreferencesDIalog()
 {
-    UpdateSettings();
     delete ui;
 }
 
@@ -51,4 +47,9 @@ void PreferencesDIalog::on_SelectFile_clicked()
     {
         ui->DefaultNoteFile->setText(fileDiag->selectedFiles()[0]);
     }
+}
+
+void PreferencesDIalog::on_buttonBox_accepted()
+{
+    UpdateSettings();
 }

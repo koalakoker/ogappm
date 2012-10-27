@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
     gap_settings.LoadConfig();
 
-    QString file(homedir);
+    QString file(gap_settings.Get(GSETTING_DEFNOTEFILE_CFGSTR)->Value().toString());
     int update;
     do
     {

@@ -23,8 +23,8 @@ public:
     void updateTitle();
     void updateData();
 
-    void readSettings();
-    void writeSettings();
+    void readWindowsSettings();
+    void writeWindowsSettings();
 
 public slots:
     void deleteNote(int index);   

@@ -21,6 +21,8 @@ private slots:
     void on_RestoreDefault_clicked();
     void on_SelectFile_clicked();
 
+    void on_buttonBox_accepted();
+
 private:
     Ui::PreferencesDIalog *ui;
     GSettings* m_settings;

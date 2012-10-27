@@ -24,19 +24,47 @@ GappMainWindow::GappMainWindow(GAPP_Data* pData, GSettings* pSettings, QWidget *
     ui->testo1->setFocus();
     connect(ui->noteTab, SIGNAL(tabCloseRequested(int)), this, SLOT(deleteNote(int)));
     m_strToBeFind.clear();
-    readSettings();
+
+    resize(QSize(800, 600));
+    move(QPoint(20, 20));
+    if (p_settings->Get(GSETTING_SAVEWINSTATE_CFGSTR)->Value().toBool())
+    {
+        readWindowsSettings();
+    }
 }
 
 GappMainWindow::~GappMainWindow()
 {
-    writeSettings();
+    if (p_settings->Get(GSETTING_SAVEWINSTATE_CFGSTR)->Value().toBool())
+    {
+        writeWindowsSettings();
+    }
     delete ui;
 }
 
 void GappMainWindow::closeEvent(QCloseEvent* event)
 {
     updateData();
-    p_data->saveData();
+    bool saveIt = false;
+    if (!p_settings->Get(GSETTING_AUTOSAVE_CFGSTR)->Value().toBool())
+    {
+        QMessageBox msg;
+        msg.setText("Do you want to save the notes into the file?");
+        msg.setIcon(QMessageBox::Question);
+        msg.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+        if (msg.exec() == QMessageBox::Yes)
+        {
+            saveIt = true;
+        }
+    }
+    else
+    {
+        saveIt = true;
+    }
+    if (saveIt)
+    {
+        p_data->saveData();
+    }
     event->accept();
 }
 
@@ -446,9 +474,9 @@ void GappMainWindow::on_actionF_ind_next_activated()
     txtNote->find(m_strToBeFind);
 }
 
-void GappMainWindow::writeSettings()
+void GappMainWindow::writeWindowsSettings()
  {
-     QSettings settings("Koalakoker", "OGapp");
+     QSettings settings(p_settings->Organization(),p_settings->Application());
 
      settings.beginGroup("MainWindow");
      settings.setValue("maximized", isMaximized());
@@ -457,9 +485,9 @@ void GappMainWindow::writeSettings()
      settings.endGroup();
  }
 
- void GappMainWindow::readSettings()
+ void GappMainWindow::readWindowsSettings()
  {
-     QSettings settings("Koalakoker", "OGapp");
+     QSettings settings(p_settings->Organization(),p_settings->Application());
 
      settings.beginGroup("MainWindow");
      if ((settings.value("maximized",false).toBool())==false)

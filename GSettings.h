@@ -14,6 +14,8 @@ public:
     void RestoreDefault(void);
     GSettingsItem* Get(QString confStr);
     void SetValue(QString confStr,QVariant value);
+    QString Organization(void){return m_organization;};
+    QString Application(void){return m_application;};
 private:
     QString m_organization;
     QString m_application;

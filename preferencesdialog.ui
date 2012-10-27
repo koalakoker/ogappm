@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>590</width>
-    <height>179</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,9 +56,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="ShowTips">
+    <widget class="QCheckBox" name="SaveWinState">
      <property name="text">
-      <string>Show tips</string>
+      <string>Save window state</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -66,9 +66,12 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="SaveWinState">
+    <widget class="QCheckBox" name="ShowTips">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
-      <string>Save window state</string>
+      <string>Show tips at startup</string>
      </property>
      <property name="checked">
       <bool>true</bool>
