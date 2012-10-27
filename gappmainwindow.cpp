@@ -9,26 +9,28 @@
 #include "qmyfiledialog.h"
 #include "noteselection.h"
 #include "finddialog.h"
+#include "preferencesdialog.h"
 #include <QMessageBox>
+#include <QSettings>
 
-GappMainWindow::GappMainWindow(QWidget *parent) :
+GappMainWindow::GappMainWindow(GAPP_Data* pData, GSettings* pSettings, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GappMainWindow)
 {
+    this->p_data = pData;
+    this->p_settings = pSettings;
+
     ui->setupUi(this);
     ui->testo1->setFocus();
     connect(ui->noteTab, SIGNAL(tabCloseRequested(int)), this, SLOT(deleteNote(int)));
-    m_strToBeFind.clear();;
+    m_strToBeFind.clear();
+    readSettings();
 }
 
 GappMainWindow::~GappMainWindow()
 {
+    writeSettings();
     delete ui;
-}
-
-void GappMainWindow::addData(GAPP_Data* pData)
-{
-    p_data = pData;
 }
 
 void GappMainWindow::closeEvent(QCloseEvent* event)
@@ -442,4 +444,41 @@ void GappMainWindow::on_actionF_ind_next_activated()
     QLayoutItem* layItem = lay->itemAtPosition(0,0);
     QMyPlainTextEdit* txtNote = (QMyPlainTextEdit*)layItem->widget();
     txtNote->find(m_strToBeFind);
+}
+
+void GappMainWindow::writeSettings()
+ {
+     QSettings settings("Koalakoker", "OGapp");
+
+     settings.beginGroup("MainWindow");
+     settings.setValue("maximized", isMaximized());
+     settings.setValue("size", size());
+     settings.setValue("pos", pos());
+     settings.endGroup();
+ }
+
+ void GappMainWindow::readSettings()
+ {
+     QSettings settings("Koalakoker", "OGapp");
+
+     settings.beginGroup("MainWindow");
+     if ((settings.value("maximized",false).toBool())==false)
+     {
+        resize(settings.value("size", QSize(800, 600)).toSize());
+        move(settings.value("pos", QPoint(200, 200)).toPoint());
+     }
+     else
+     {
+         setWindowState(windowState() | Qt::WindowMaximized);
+     }
+     settings.endGroup();
+ }
+
+void GappMainWindow::on_action_Preference_activated()
+{
+    PreferencesDIalog dlg(p_settings);
+    if (dlg.exec())
+    {
+        // Do someting
+    }
 }

@@ -124,6 +124,7 @@
      <string>&amp;Tools</string>
     </property>
     <addaction name="action_Set_or_change_password"/>
+    <addaction name="action_Preference"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -159,6 +160,8 @@
    <addaction name="action_Find"/>
    <addaction name="separator"/>
    <addaction name="action_Set_or_change_password"/>
+   <addaction name="separator"/>
+   <addaction name="action_Preference"/>
    <addaction name="separator"/>
    <addaction name="action_About"/>
   </widget>
@@ -288,6 +291,15 @@
    </property>
    <property name="shortcut">
     <string>F3</string>
+   </property>
+  </action>
+  <action name="action_Preference">
+   <property name="icon">
+    <iconset resource="OGappResources.qrc">
+     <normaloff>:/OGapp/set1/icons/properties.png</normaloff>:/OGapp/set1/icons/properties.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Preference</string>
    </property>
   </action>
  </widget>

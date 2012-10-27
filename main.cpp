@@ -1,5 +1,6 @@
 #include "gappmainwindow.h"
 #include "GAPP_Data.h"
+#include "GSettings.h"
 #include "qmyfiledialog.h"
 
 #include <QtGui>
@@ -22,6 +23,10 @@ int main(int argc, char *argv[])
 
     // Gapp Data
     GAPP_Data gap_Data;
+    GSettings gap_settings("Koalakoker", "OGapp");
+    gap_settings.append(new GSettingsItem(GSETTING_AUTOSAVE_CFGSTR,GSETTING_AUTOSAVE_DEFAULT));
+    gap_settings.append(new GSettingsItem(GSETTING_SHOWTIPS_CFGSTR,GSETTING_SHOWTIPS_DEFAULT));
+    gap_settings.append(new GSettingsItem(GSETTING_SAVEWINSTATE_CFGSTR,GSETTING_SAVEWINSTATE_DEFAULT));
 
     char *homedir;
 #ifdef Q_OS_LINUX
@@ -32,6 +37,10 @@ int main(int argc, char *argv[])
     char defaultHomeDir[] = "gapp.ogp";
     homedir = defaultHomeDir;
 #endif
+
+    gap_settings.append((new GSettingsItem(GSETTING_DEFNOTEFILE_CFGSTR,homedir)));
+
+    gap_settings.LoadConfig();
 
     QString file(homedir);
     int update;
@@ -77,8 +86,7 @@ int main(int argc, char *argv[])
     case DATA_CRYPTED_PASSWORD_MATCH:
     case FILE_EXISTING_NO_CRYPTED:
         {
-            GappMainWindow w;
-            w.addData(&gap_Data);
+            GappMainWindow w(&gap_Data,&gap_settings);
             w.updateGUI();
             w.show();
             retVal = a.exec();
@@ -92,8 +100,7 @@ int main(int argc, char *argv[])
             gap_Data.notesAdd("");
             gap_Data.notesAdd("");
             gap_Data.notesAdd("");
-            GappMainWindow w;
-            w.addData(&gap_Data);
+            GappMainWindow w(&gap_Data,&gap_settings);
             w.updateGUI();
             w.show();
             retVal = a.exec();
@@ -105,5 +112,8 @@ int main(int argc, char *argv[])
         }
         break;
     }
+
+    gap_settings.SaveConfig();
+
     return retVal;
 }

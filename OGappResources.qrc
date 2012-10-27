@@ -16,5 +16,6 @@
         <file>icons/password.png</file>
         <file>icons/properties.png</file>
         <file>icons/Actions search.png</file>
+        <file>icons/OnLamp.png</file>
     </qresource>
 </RCC>

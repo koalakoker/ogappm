@@ -19,7 +19,11 @@ HEADERS += \
     gappmainwindow.h \
     qmyfiledialog.h \
     noteselection.h \
-    finddialog.h
+    finddialog.h \
+    preferencesdialog.h \
+    GSettingsItem.h \
+    GSettings.h \
+    GSettingDefines.h
 SOURCES += \
     ChangePasswordDiag.cpp \
     QMyFileFunctions.cpp \
@@ -35,7 +39,10 @@ SOURCES += \
     gappmainwindow.cpp \
     qmyfiledialog.cpp \
     noteselection.cpp \
-    finddialog.cpp
+    finddialog.cpp \
+    preferencesdialog.cpp \
+    GSettingsItem.cpp \
+    GSettings.cpp
 FORMS += \
     ChangePasswordDiag.ui \
     qpassworddiag.ui \
@@ -43,7 +50,8 @@ FORMS += \
     aboutdialog.ui \
     gappmainwindow.ui \
     noteselection.ui \
-    finddialog.ui
+    finddialog.ui \
+    preferencesdialog.ui
 RESOURCES += OGappResources.qrc \
     AboutDialog.qrc
 RC_FILE = gapp.rc
