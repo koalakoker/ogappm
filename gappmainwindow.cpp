@@ -10,6 +10,7 @@
 #include "noteselection.h"
 #include "finddialog.h"
 #include "preferencesdialog.h"
+#include "TipsDialog.h"
 #include <QMessageBox>
 #include <QSettings>
 
@@ -30,6 +31,15 @@ GappMainWindow::GappMainWindow(GAPP_Data* pData, GSettings* pSettings, QWidget *
     if (p_settings->Get(GSETTING_SAVEWINSTATE_CFGSTR)->Value().toBool())
     {
         readWindowsSettings();
+    }
+
+    // Show tips
+    if (p_settings->Get(GSETTING_SHOWTIPS_CFGSTR)->Value().toBool())
+    {
+        TipsDialog* tipDlg = new TipsDialog(this);
+        tipDlg->SetSettings(p_settings);
+        tipDlg->show();
+        tipDlg->raise();
     }
 }
 
