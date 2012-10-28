@@ -10,6 +10,7 @@
 #include "noteselection.h"
 #include "finddialog.h"
 #include "preferencesdialog.h"
+#include "Tips.h"
 #include "TipsDialog.h"
 #include <QMessageBox>
 #include <QSettings>
@@ -36,7 +37,18 @@ GappMainWindow::GappMainWindow(GAPP_Data* pData, GSettings* pSettings, QWidget *
     // Show tips
     if (p_settings->Get(GSETTING_SHOWTIPS_CFGSTR)->Value().toBool())
     {
-        TipsDialog* tipDlg = new TipsDialog(this);
+        Tips* pTips = new Tips();
+        pTips->append(QString(tr("Welcome to OGapp!\n\nOGapp is a slim sized and fast program to manage your textual notes. Notes are organized in pages and it is possible to setup a main password to get the access to the notes. When the notes are password protected the .ogp file in which the notes are stored is encrypted.\nOGapp is cross platform and is available for Windows, Linux and (maybe in the future) Mac. It is based on Qt4 and is written in C++.")));
+        pTips->append(QString(tr("The \"default\" note file\n\nWhen you start OGapp the \"default\" .ogp file will be opened. If it is the first time a new one will be created. When you close the program all the modifications you did during the last session is automatically saved. In this way you can access very fast to your \"default\" notes. This behavior can be modified launching the command \"Preference\".")));
+        pTips->append(QString(tr("Encrypt file\n\nIf you want to protect your notes it is possible to set a password launching \"set or change password\" command. When the password is set the file .ogp is saved encrypted. OGapp uses the password as key to crypt or decrypt the data. Just a password hash is stored into the file for a verification if the password is correct. You can disable the encryption of the .ogp file launching \"set or change password\" command and push reset (old password is required).")));
+        pTips->append(QString(tr("Drag & Drop\n\nTry to drag a textual file (like .txt or any source file .c .cpp .h) from any window and drop it inside a note page. It will be added to that note page.\n\nIf you drop it into the tab labels (for example Pag1, Pag2, ...) a new page will be created.")));
+        pTips->append(QString(tr("Find\n\nIf you want to find very fast a note that contains a particular string, simply press CTRL+F and type just few character of that string. A list of pages containing that string will appear in the result list. Double click on it and the note will be opened. Push F3 to find next occurrence inside that pages.")));
+        pTips->append(QString(tr("Launch links in browser\n\nPress CTRL+W and click on a URL (like https://sourceforge.net/projects/ogapp/) inside a note to open the link in the default browser.")));
+        pTips->append(QString(tr("Change note pages order\n\nTry to drag one note tab (Pag1, Pag2, ...) over another note tab. The order of the pages will be modified.")));
+        pTips->append(QString(tr("Note listing\n\nLaunch the command \"Show index\" to generate a list of note pages including as reference the first rows of the note. Double click on a page for a quick jump.")));
+        pTips->append(QString(tr("Note file info\n\nWhen you open, create, save, saveAs or import a .ogp file you can see in the dialog a preview showing a short list of the pages including the first row of each note as a reference.\nIf the file is encrypted, just the number of pages is shown.")));
+        pTips->append(QString(tr("Import from a file\n\nYou can import selectively notes from an existing .ogp file using the \"Import from file\" command. A dialog showing the notes that is present in the selected file that do not match the actual note present in the working document is highlighted (this to avoid import a duplicate note). Then you can select which notes will be added. You can even import duplicates.")));
+        TipsDialog* tipDlg = new TipsDialog(pTips,0,this);
         tipDlg->SetSettings(p_settings);
         tipDlg->show();
         tipDlg->raise();

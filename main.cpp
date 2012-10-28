@@ -21,6 +21,15 @@ int main(int argc, char *argv[])
     int retVal = 1;
     QApplication a(argc, argv);
 
+//    QTranslator translator;
+//    translator.load(QString("OGapp_")+QLocale::system().name());
+//    //translator.load(QString("OGapp_it_IT.qm"));
+//    a.installTranslator(&translator);
+
+//    QTranslator qtTranslator;
+//    qtTranslator.load(QString("qt_")+QLocale::system().name());
+//    a.installTranslator(&qtTranslator);
+
     // Gapp Data
     GAPP_Data gap_Data;
     GSettings gap_settings("Koalakoker", "OGapp");
