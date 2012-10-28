@@ -48,10 +48,18 @@ GappMainWindow::GappMainWindow(GAPP_Data* pData, GSettings* pSettings, QWidget *
         pTips->append(QString(tr("Note listing\n\nLaunch the command \"Show index\" to generate a list of note pages including as reference the first rows of the note. Double click on a page for a quick jump.")));
         pTips->append(QString(tr("Note file info\n\nWhen you open, create, save, saveAs or import a .ogp file you can see in the dialog a preview showing a short list of the pages including the first row of each note as a reference.\nIf the file is encrypted, just the number of pages is shown.")));
         pTips->append(QString(tr("Import from a file\n\nYou can import selectively notes from an existing .ogp file using the \"Import from file\" command. A dialog showing the notes that is present in the selected file that do not match the actual note present in the working document is highlighted (this to avoid import a duplicate note). Then you can select which notes will be added. You can even import duplicates.")));
-        TipsDialog* tipDlg = new TipsDialog(pTips,0,this);
+
+        int tipSel = p_settings->Get(GSETTING_SHOWTIPSSEL_CFGSTR)->Value().toInt();
+        TipsDialog* tipDlg = new TipsDialog(pTips,tipSel,this);
         tipDlg->SetSettings(p_settings);
         tipDlg->show();
         tipDlg->raise();
+        tipSel++;
+        if (tipSel >= pTips->count())
+        {
+            tipSel = 0;
+        }
+        p_settings->SetValue(GSETTING_SHOWTIPSSEL_CFGSTR,tipSel);
     }
 }
 

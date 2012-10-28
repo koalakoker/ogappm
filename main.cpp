@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     GSettings gap_settings("Koalakoker", "OGapp");
     gap_settings.append(new GSettingsItem(GSETTING_AUTOSAVE_CFGSTR,GSETTING_AUTOSAVE_DEFAULT));
     gap_settings.append(new GSettingsItem(GSETTING_SHOWTIPS_CFGSTR,GSETTING_SHOWTIPS_DEFAULT));
+    gap_settings.append(new GSettingsItem(GSETTING_SHOWTIPSSEL_CFGSTR,GSETTING_SHOWTIPSSEL_DEFAULT));
     gap_settings.append(new GSettingsItem(GSETTING_SAVEWINSTATE_CFGSTR,GSETTING_SAVEWINSTATE_DEFAULT));
 
     char *homedir;
