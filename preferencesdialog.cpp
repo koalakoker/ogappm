@@ -42,7 +42,7 @@ void PreferencesDIalog::UpdateSettings(void)
 
 void PreferencesDIalog::on_SelectFile_clicked()
 {
-    QMyFileDialog* fileDiag = new QMyFileDialog(this,"Open .ogp file","","*.ogp");
+    QMyFileDialog* fileDiag = new QMyFileDialog(this,tr("Open .ogp file"),"","*.ogp");
     if (fileDiag->exec())
     {
         ui->DefaultNoteFile->setText(fileDiag->selectedFiles()[0]);

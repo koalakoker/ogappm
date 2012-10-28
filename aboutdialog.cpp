@@ -16,7 +16,7 @@ AboutDialog::~AboutDialog()
 
 void AboutDialog::SetAboutTxt(QString txt)
 {
-    QString title = "About ";
+    QString title = tr("About ");
     title.append(txt);
     this->setWindowTitle(title);
     ui->AboutText->setText(txt);

@@ -17,5 +17,6 @@
         <file>icons/properties.png</file>
         <file>icons/Actions search.png</file>
         <file>icons/OnLamp.png</file>
+        <file>OGapp_it_IT.qm</file>
     </qresource>
 </RCC>

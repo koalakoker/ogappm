@@ -80,7 +80,7 @@ void GAPP_Data::notesAdd(QString str)
 
 void GAPP_Data::AfxMessageBox(QString txt)
 {
-	QMessageBox* errMsg = new QMessageBox(QMessageBox::Critical,QString("Error"),txt);
+    QMessageBox* errMsg = new QMessageBox(QMessageBox::Critical,QString(tr("Error")),txt);
 	errMsg->exec();
 }
 
@@ -152,7 +152,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
     {
         if( !file.open( QIODevice::ReadOnly ) )
         {
-            AfxMessageBox("Failed to open file for reading.");
+            AfxMessageBox(tr("Failed to open file for reading."));
             *retVal = ERROR_READING_FILE;
             returnVal = false;
         }
@@ -164,7 +164,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
             QString type(buff);
             if (type != "OGP")
             {
-                AfxMessageBox("Is not valid ogp file format");
+                AfxMessageBox(tr("Is not valid ogp file format"));
                 *retVal = ERROR_FILE_NOT_VALID;
                 returnVal = false;
             }
@@ -174,7 +174,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                 int ver = readInt(&file,&ok);
                 if (!ok)
                 {
-                    AfxMessageBox("Is not valid ogp file format");
+                    AfxMessageBox(tr("Is not valid ogp file format"));
                     *retVal = ERROR_FILE_NOT_VALID;
                     returnVal = false;
                 }
@@ -188,7 +188,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                             H = readInt(&file,&ok);
                             if (!ok)
                             {
-                                AfxMessageBox("Is not valid ogp file format");
+                                AfxMessageBox(tr("Is not valid ogp file format"));
                                 *retVal = ERROR_FILE_NOT_VALID;
                                 returnVal = false;
                             }
@@ -197,7 +197,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                 L = readInt(&file,&ok);
                                 if (!ok)
                                 {
-                                    AfxMessageBox("Is not valid ogp file format");
+                                    AfxMessageBox(tr("Is not valid ogp file format"));
                                     *retVal = ERROR_FILE_NOT_VALID;
                                     returnVal = false;
                                 }
@@ -205,7 +205,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                 {
                                     if (!readQStringList(&file,&m_notes))
                                     {
-                                        AfxMessageBox("Is not valid ogp file format");
+                                        AfxMessageBox(tr("Is not valid ogp file format"));
                                         *retVal = ERROR_FILE_NOT_VALID;
                                         returnVal = false;
                                     }
@@ -232,7 +232,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                                 }
                                                 else
                                                 {
-                                                    AfxMessageBox("Password Errata!");
+                                                    AfxMessageBox(tr("Wrong password!"));
                                                     *retVal = ERROR_PASSWORD_ERROR;
                                                     returnVal = false;
                                                 }
@@ -264,7 +264,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                         break;
                     default:
                         {
-                            AfxMessageBox("File is not supported");
+                            AfxMessageBox(tr("File is not supported"));
                             *retVal = ERROR_FILE_NOT_VALID;
                             retVal = false;
                         }
@@ -411,7 +411,7 @@ bool GAPP_Data::saveData(void)
 	QFile file( m_fileName );
 	if( !file.open( QIODevice::WriteOnly ) )
 	{
-		AfxMessageBox("Failed to open file for writing.");
+        AfxMessageBox(tr("Failed to open file for writing."));
 		return false;
 	}
 

@@ -21,10 +21,10 @@ int main(int argc, char *argv[])
     int retVal = 1;
     QApplication a(argc, argv);
 
-//    QTranslator translator;
-//    translator.load(QString("OGapp_")+QLocale::system().name());
-//    //translator.load(QString("OGapp_it_IT.qm"));
-//    a.installTranslator(&translator);
+    QTranslator translator;
+    //translator.load(QString("OGapp_")+QLocale::system().name());
+    translator.load(QString("OGapp_it_IT.qm"),":/OGapp/set1");
+    a.installTranslator(&translator);
 
 //    QTranslator qtTranslator;
 //    qtTranslator.load(QString("qt_")+QLocale::system().name());
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         {
         case OPEN_FILE:
             {
-                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Open .ogp file","","*.ogp");
+                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,a.translate(0,"Open .ogp file"),"","*.ogp");
                 if (fileDiag->exec())
                 {
                     QStringList fileName = fileDiag->selectedFiles();
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
             break;
         case NEW_FILE:
             {
-                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,"Create new .ogp file","","*.ogp");
+                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,a.translate(0,"Create new .ogp file"),"","*.ogp");
                 fileDiag->setAcceptMode(QFileDialog::AcceptSave);
                 fileDiag->setDefaultSuffix("ogp");
                 if (fileDiag->exec())

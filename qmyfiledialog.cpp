@@ -47,9 +47,9 @@ void QMyFileDialog::UpdateFileInfo(QStringList info)
 void QMyFileDialog::getFileInfo(QString fileName)
 {
     QStringList fileInfo;
-    fileInfo.append("File info");
+    fileInfo.append(tr("File info"));
     QString out;
-    out = "Path: ";
+    out = tr("Path: ");
     out.append(fileName);
     fileInfo.append(out);
     GAPP_Data dataFileChk;
@@ -57,24 +57,24 @@ void QMyFileDialog::getFileInfo(QString fileName)
     dataFileChk.LoadDataOffline(fileName,&retVal,"");
     if (retVal == ERROR_READING_FILE)
     {
-        fileInfo.append("Not valid or supported file");
+        fileInfo.append(tr("Not valid or supported file"));
     }
     else if (retVal == ERROR_PASSWORD_ERROR)
     {
-        /* File is crypted */
+        /* File is encrypted */
         QString num;
         num.setNum(dataFileChk.notesCount());
-        out = "Number of pages:";
+        out = tr("Number of pages:");
         out.append(num);
         fileInfo.append(out);
-        fileInfo.append("File is crypted");
+        fileInfo.append(tr("File is encrypted"));
     }
     else
     {
-        /* File is not crypted */
+        /* File is not encrypted */
         QString num;
         num.setNum(dataFileChk.notesCount());
-        out = "Number of pages:";
+        out = tr("Number of pages:");
         out.append(num);
         fileInfo.append(out);
         QStringList previewList;

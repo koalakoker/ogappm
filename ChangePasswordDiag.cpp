@@ -29,19 +29,19 @@ void ChangePasswordDiag::checkPass(void)
 {
 	if (ui.oldPass->text() != m_oldPass)
 	{
-		AfxMessageBox("Old password is not correct!");
+        AfxMessageBox(tr("Old password is not correct!"));
 		return;
 	}
 	if (ui.newPass->text() != ui.confirmPass->text())
 	{
-		AfxMessageBox("New password and Confirm password are different!");
+        AfxMessageBox(tr("New password and Confirm password are different!"));
 		return;
 	}
 	if (ui.newPass->text() == ui.oldPass->text())
 	{
-		if (ui.newPass->text()!="")
+        if (ui.newPass->text()!="")
 		{
-			AfxMessageBox("New password and new password are the same!");
+            AfxMessageBox(tr("New password and old password are the same!"));
 			return;
 		}
 	}
@@ -61,10 +61,10 @@ void ChangePasswordDiag::clickButton(QAbstractButton* button)
 		}
 		else
 		{
-			ui.newPass->setText("");
+            ui.newPass->setText("");
 			ui.newPass->hide();
 			ui.newPassLabel->hide();
-			ui.confirmPass->setText("");
+            ui.confirmPass->setText("");
 			ui.confirmPass->hide();
 			ui.confirmPassLabel->hide();
 		}
@@ -73,6 +73,6 @@ void ChangePasswordDiag::clickButton(QAbstractButton* button)
 
 void ChangePasswordDiag::AfxMessageBox(QString txt)
 {
-	QMessageBox* errMsg = new QMessageBox(QMessageBox::Critical,QString("Error"),txt);
+    QMessageBox* errMsg = new QMessageBox(QMessageBox::Critical,QString(tr("Error")),txt);
 	errMsg->exec();
 }
