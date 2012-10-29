@@ -554,13 +554,38 @@ Scaricati da http://www.veryicon.com</translation>
     </message>
     <message>
         <location filename="preferencesdialog.ui" line="86"/>
+        <source>Language</source>
+        <translation>Lingua</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="94"/>
+        <source>English</source>
+        <translation>Inglese</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="99"/>
+        <source>Italian</source>
+        <translation>Italiano</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.ui" line="124"/>
         <source>Restore default</source>
         <translation>Ripristina default</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="45"/>
+        <location filename="preferencesdialog.cpp" line="62"/>
         <source>Open .ogp file</source>
         <translation>Apri file .ogp</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.cpp" line="76"/>
+        <source>Information</source>
+        <translation>Informazione</translation>
+    </message>
+    <message>
+        <location filename="preferencesdialog.cpp" line="76"/>
+        <source>Restart OGapp to take effect</source>
+        <translation>Riavvia OGapp per rendere effettiva la nuova opzione</translation>
     </message>
 </context>
 <context>

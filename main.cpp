@@ -21,15 +21,6 @@ int main(int argc, char *argv[])
     int retVal = 1;
     QApplication a(argc, argv);
 
-    QTranslator translator;
-    //translator.load(QString("OGapp_")+QLocale::system().name());
-    translator.load(QString("OGapp_it_IT.qm"),":/OGapp/set1");
-    a.installTranslator(&translator);
-
-//    QTranslator qtTranslator;
-//    qtTranslator.load(QString("qt_")+QLocale::system().name());
-//    a.installTranslator(&qtTranslator);
-
     // Gapp Data
     GAPP_Data gap_Data;
     GSettings gap_settings("Koalakoker", "OGapp");
@@ -37,6 +28,7 @@ int main(int argc, char *argv[])
     gap_settings.append(new GSettingsItem(GSETTING_SHOWTIPS_CFGSTR,GSETTING_SHOWTIPS_DEFAULT));
     gap_settings.append(new GSettingsItem(GSETTING_SHOWTIPSSEL_CFGSTR,GSETTING_SHOWTIPSSEL_DEFAULT));
     gap_settings.append(new GSettingsItem(GSETTING_SAVEWINSTATE_CFGSTR,GSETTING_SAVEWINSTATE_DEFAULT));
+    gap_settings.append(new GSettingsItem(GSETTING_LANGUAGE_CFGSTR,QLocale::system().name()));
 
     char *homedir;
 #ifdef Q_OS_LINUX
@@ -51,6 +43,15 @@ int main(int argc, char *argv[])
     gap_settings.append((new GSettingsItem(GSETTING_DEFNOTEFILE_CFGSTR,homedir)));
 
     gap_settings.LoadConfig();
+
+    QTranslator translator;
+    translator.load(QString("OGapp_")+gap_settings.Get(GSETTING_LANGUAGE_CFGSTR)->Value().toString(),":/OGapp/set1");
+    //translator.load(QString("OGapp_it_IT.qm"),":/OGapp/set1");
+    a.installTranslator(&translator);
+
+//    QTranslator qtTranslator;
+//    qtTranslator.load(QString("qt_")+QLocale::system().name());
+//    a.installTranslator(&qtTranslator);
 
     QString file(gap_settings.Get(GSETTING_DEFNOTEFILE_CFGSTR)->Value().toString());
     int update;

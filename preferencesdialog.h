@@ -23,11 +23,14 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void on_LanguageSel_currentIndexChanged(int index);
+
 private:
     Ui::PreferencesDIalog *ui;
     GSettings* m_settings;
 
     void UpdateGUI(void);
+    bool GUIIsUpdating;
     void UpdateSettings(void);
 };
 
