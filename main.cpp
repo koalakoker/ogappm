@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
         {
         case OPEN_FILE:
             {
-                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,a.translate(0,"Open .ogp file"),"","*.ogp");
+            QMyFileDialog* fileDiag = new QMyFileDialog(NULL,a.translate("mainStr","Open .ogp file"),"","*.ogp");
                 if (fileDiag->exec())
                 {
                     QStringList fileName = fileDiag->selectedFiles();
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
             break;
         case NEW_FILE:
             {
-                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,a.translate(0,"Create new .ogp file"),"","*.ogp");
+                QMyFileDialog* fileDiag = new QMyFileDialog(NULL,a.translate("mainStr","Create new .ogp file"),"","*.ogp");
                 fileDiag->setAcceptMode(QFileDialog::AcceptSave);
                 fileDiag->setDefaultSuffix("ogp");
                 if (fileDiag->exec())

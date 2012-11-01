@@ -2836,12 +2836,12 @@ to
     <message>
         <location filename="../src/gui/dialogs/qdialog.cpp" line="+526"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatto</translation>
     </message>
     <message>
         <location line="+127"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>Cos&apos;è?</translation>
     </message>
 </context>
 <context>
@@ -2974,29 +2974,29 @@ to
     <message>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+438"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimenzione</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Kind</source>
         <comment>Match OS X Finder</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Type</source>
         <comment>All other platforms</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Date Modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Data modifica</translation>
     </message>
 </context>
 <context>
@@ -3035,27 +3035,27 @@ to
     <message>
         <location filename="../src/gui/dialogs/qerrormessage.cpp" line="+208"/>
         <source>Debug Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio di debug:</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Warning:</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvertimento:</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Fatal Error:</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore fatale:</translation>
     </message>
     <message>
         <location line="+208"/>
         <source>&amp;Show this message again</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mostra questo messaggio nuovamente</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 <context>
@@ -3180,7 +3180,7 @@ to
         <location/>
         <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Files of type:</source>
-        <translation type="unfinished">Tipo di file:</translation>
+        <translation>Tipo di file:</translation>
     </message>
     <message>
         <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+552"/>
@@ -3380,82 +3380,82 @@ Vuoi cancellarlo lo stesso?</translation>
         <location filename="../src/gui/dialogs/qfilesystemmodel.cpp" line="+763"/>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+482"/>
         <source>%1 TB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
         <source>%1 GB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
         <source>%1 MB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+2"/>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
         <source>%1 KB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>%1 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+89"/>
         <source>Invalid filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome file non valido</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Il nome &quot;%1&quot; non può essere usato.&lt;/b&gt;&lt;p&gt;Prova ad usare un altro nome, con meno caratteri o senza punteggiatura.</translation>
     </message>
     <message>
         <location line="+64"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimenzione</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Kind</source>
         <comment>Match OS X Finder</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Type</source>
         <comment>All other platforms</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Date Modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Data ultima modifica</translation>
     </message>
     <message>
         <location filename="../src/gui/dialogs/qfilesystemmodel_p.h" line="+261"/>
         <source>My Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mio computer</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer</translation>
     </message>
     <message>
         <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+1"/>
         <source>%1 byte(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 byte</translation>
     </message>
 </context>
 <context>

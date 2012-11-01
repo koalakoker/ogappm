@@ -261,7 +261,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="gappmainwindow.ui" line="207"/>
         <source>Go &amp;Next or create new</source>
-        <translation>&amp;Vai alsuccessivo o crea nuovo</translation>
+        <translation>&amp;Vai al successivo o crea nuovo</translation>
     </message>
     <message>
         <location filename="gappmainwindow.ui" line="210"/>
@@ -573,17 +573,17 @@ Scaricati da http://www.veryicon.com</translation>
         <translation>Ripristina default</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="62"/>
+        <location filename="preferencesdialog.cpp" line="65"/>
         <source>Open .ogp file</source>
         <translation>Apri file .ogp</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="76"/>
+        <location filename="preferencesdialog.cpp" line="81"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="preferencesdialog.cpp" line="76"/>
+        <location filename="preferencesdialog.cpp" line="81"/>
         <source>Restart OGapp to take effect</source>
         <translation>Riavvia OGapp per rendere effettiva la nuova opzione</translation>
     </message>
@@ -689,6 +689,19 @@ Create new file or open another one otherwise.</source>
         <location filename="TipsDialog.cpp" line="27"/>
         <source>You can re-enable the tips in the preference window</source>
         <translation>Puoi riabilitare i suggerimenti nella fienstra delle preferenze</translation>
+    </message>
+</context>
+<context>
+    <name>mainStr</name>
+    <message>
+        <location filename="main.cpp" line="52"/>
+        <source>Open .ogp file</source>
+        <translation>Apri file .ogp</translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="62"/>
+        <source>Create new .ogp file</source>
+        <translation>Crea un nuovo file .ogp</translation>
     </message>
 </context>
 <context>
