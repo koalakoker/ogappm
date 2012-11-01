@@ -1,0 +1,27 @@
+For linux user the step is a little bit complex but we are linux guy and so this is bread for our thoot.
+You have to compile the executable from the sources so download the last version of ogapp-x.y.z.tar.gz and extract it in a working folder.
+It is a QT progect so you can open a terminal and type
+
+cd <working folder>
+
+Then you have to prepare the build using 
+
+qmake 
+
+and then build using 
+
+make
+
+To do this probably you need to have the QT and qmake installed. (I'll try to start from a clean installation to verify which package you need to install).
+If all goes good the compiled file OGapp will be generated in the working folder.
+You can run it from there 
+
+./OGapp 
+
+or you can insall it in in the /usr/bin folder
+
+sudo cp OGapp /usr/bin
+
+And you can start it from anywhere typing 
+
+OGapp

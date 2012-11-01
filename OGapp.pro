@@ -60,4 +60,5 @@ FORMS += \
 RESOURCES += OGappResources.qrc \
     AboutDialog.qrc
 RC_FILE = gapp.rc
-TRANSLATIONS += OGapp_it_IT.ts
+TRANSLATIONS += OGapp_it_IT.ts \
+    qt_it_IT.ts

@@ -1,20 +1,9 @@
+#include <QtGui>
+
 #include "gappmainwindow.h"
 #include "GAPP_Data.h"
 #include "GSettings.h"
 #include "qmyfiledialog.h"
-
-#include <QtGui>
-#include <QApplication>
-#include <QMessageBox>
-#include <QStringList>
-
-#ifdef Q_OS_LINUX
-#include <unistd.h>
-#include <sys/types.h>
-#include <pwd.h>
-#include <string.h>
-#include "stdio.h"
-#endif
 
 int main(int argc, char *argv[])
 {
@@ -30,28 +19,26 @@ int main(int argc, char *argv[])
     gap_settings.append(new GSettingsItem(GSETTING_SAVEWINSTATE_CFGSTR,GSETTING_SAVEWINSTATE_DEFAULT));
     gap_settings.append(new GSettingsItem(GSETTING_LANGUAGE_CFGSTR,QLocale::system().name()));
 
-    char *homedir;
-#ifdef Q_OS_LINUX
-    struct passwd *pw = getpwuid(getuid());
-    homedir = pw->pw_dir;
-    homedir = strcat (homedir,"/OGap/gapp.ogp");
-#else
-    char defaultHomeDir[] = "gapp.ogp";
-    homedir = defaultHomeDir;
-#endif
+    QDir dir = QDir::homePath();
+    if (!dir.cd("OGap"))
+    {
+        dir.mkdir("OGap");
+        dir.cd("OGap");
+    }
+    QString defaultFile = dir.absolutePath();
+    defaultFile.append("/gapp.ogp");
 
-    gap_settings.append((new GSettingsItem(GSETTING_DEFNOTEFILE_CFGSTR,homedir)));
+    gap_settings.append((new GSettingsItem(GSETTING_DEFNOTEFILE_CFGSTR,defaultFile)));
 
     gap_settings.LoadConfig();
 
     QTranslator translator;
     translator.load(QString("OGapp_")+gap_settings.Get(GSETTING_LANGUAGE_CFGSTR)->Value().toString(),":/OGapp/set1");
-    //translator.load(QString("OGapp_it_IT.qm"),":/OGapp/set1");
     a.installTranslator(&translator);
 
-//    QTranslator qtTranslator;
-//    qtTranslator.load(QString("qt_")+QLocale::system().name());
-//    a.installTranslator(&qtTranslator);
+    QTranslator qtTranslator;
+    qtTranslator.load(QString("qt_")+gap_settings.Get(GSETTING_LANGUAGE_CFGSTR)->Value().toString(),":/OGapp/set1");
+    a.installTranslator(&qtTranslator);
 
     QString file(gap_settings.Get(GSETTING_DEFNOTEFILE_CFGSTR)->Value().toString());
     int update;
