@@ -1,5 +1,12 @@
 For linux user the step is a little bit complex but we are linux guy and so this is bread for our thoot.
-You have to compile the executable from the sources so download the last version of ogapp-x.y.z.tar.gz and extract it in a working folder.
+
+In the Linux folder you can find two file for each version:
+
+ogapp-x.y.z-ubuntu1204.tar.gz (Compiled and tested on Ubuntu 1204)
+ogapp-x.y.z-src.tar.gz (Source files)
+
+If the compiled version is not working in your linux distribution you have to compile the executable from the sources. 
+Download the last version of ogapp-x.y.z-src.tar.gz and extract it in a working folder.
 It is a QT progect so you can open a terminal and type
 
 cd <working folder>

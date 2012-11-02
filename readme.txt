@@ -1,3 +1,17 @@
+OGapp release v1.2.0
+
+files
+- ogapp-1.2.0_win_121102.exe (Setup file for window installation)
+- ogapp-1.2.0_win_121102.zip (Zip file containing the executable and required dll. Extract in a folder and run in portable mode)
+
+New features
+- Added italian localizzation
+- In the preference dialog is possible to set the preferred language: "English" or "Italian".
+- Added QT logo in the aboutdialog.
+- Fixed the issue when no home\OGap dir is present.
+- Now the default file is in <home>\OGap dir for both Linux and Windows.
+- The window installation check if previous version is present and ask to remove it before new installation.
+
 OGapp release v1.1.0
 
 files
