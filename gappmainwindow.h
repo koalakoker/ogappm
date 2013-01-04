@@ -47,6 +47,8 @@ private slots:
 
     void noteTextChanged();
 
+    void on_actionQuit_activated();
+
 private:
     Ui::GappMainWindow *ui;
 

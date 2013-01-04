@@ -540,3 +540,8 @@ void GappMainWindow::on_action_Preference_activated()
         // Do someting
     }
 }
+
+void GappMainWindow::on_actionQuit_activated()
+{
+    close();
+}

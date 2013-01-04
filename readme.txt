@@ -1,6 +1,14 @@
+OGapp release v1.2.1
+
+Change and bug fixing
+- Added "Quit" action in the File menu
+
 OGapp release v1.2.0
 
 files
+- ogapp-1.2.0_win_121109.exe (Setup file for window installation - added missing libstdc++-6.dll in the package)
+- ogapp-1.2.0_win_121109.zip (Zip file containing the executable and required dll. Extract in a folder and run in portable mode - added missing libstdc++-6.dll in the package)
+
 - ogapp-1.2.0_win_121102.exe (Setup file for window installation)
 - ogapp-1.2.0_win_121102.zip (Zip file containing the executable and required dll. Extract in a folder and run in portable mode)
 

@@ -107,6 +107,8 @@
     <addaction name="actionGet_notes_from_file"/>
     <addaction name="action_Save"/>
     <addaction name="actionS_ave_AS"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menu_Note">
     <property name="title">
@@ -300,6 +302,14 @@
    </property>
    <property name="text">
     <string>&amp;Preference</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>&amp;Quit</string>
    </property>
   </action>
  </widget>
