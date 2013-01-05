@@ -2,6 +2,8 @@ OGapp release v1.2.1
 
 Change and bug fixing
 - Added "Quit" action in the File menu
+- Note find: Fixed bug in search result, the correct page numbers is now displayed
+- Note find: Fixed bug that crash the application if OK button is pressed before to select on result 
 
 OGapp release v1.2.0
 

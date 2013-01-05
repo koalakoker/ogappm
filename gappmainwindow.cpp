@@ -487,19 +487,22 @@ void GappMainWindow::on_action_Find_activated()
     {
         // Go to finded note
         int index = dlg.noteSelected();
-        ui->noteTab->setCurrentIndex(index);
-        QWidget* pag = ui->noteTab->widget(index);
-        QGridLayout* lay = (QGridLayout*)pag->layout();
-        QLayoutItem* layItem = lay->itemAtPosition(0,0);
-        QMyPlainTextEdit* txtNote = (QMyPlainTextEdit*)layItem->widget();
         m_strToBeFind = dlg.strToBeFind();
-        QTextCursor cursor = txtNote->textCursor();
-        cursor.setPosition(0);
-        txtNote->setTextCursor(cursor);
-        int i;
-        for (i = 0; i < dlg.numFindRequired(); i++)
+        if ((index >= 0) && (index < ui->noteTab->count()))
         {
-            txtNote->find(m_strToBeFind);
+            ui->noteTab->setCurrentIndex(index);
+            QWidget* pag = ui->noteTab->widget(index);
+            QGridLayout* lay = (QGridLayout*)pag->layout();
+            QLayoutItem* layItem = lay->itemAtPosition(0,0);
+            QMyPlainTextEdit* txtNote = (QMyPlainTextEdit*)layItem->widget();
+            QTextCursor cursor = txtNote->textCursor();
+            cursor.setPosition(0);
+            txtNote->setTextCursor(cursor);
+            int i;
+            for (i = 0; i < dlg.numFindRequired(); i++)
+            {
+                txtNote->find(m_strToBeFind);
+            }
         }
     }
 }
