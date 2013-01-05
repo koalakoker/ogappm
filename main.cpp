@@ -94,10 +94,10 @@ int main(int argc, char *argv[])
         {
             // Set default 4 page empty
             gap_Data.notesRemoveAll();
-            gap_Data.notesAdd("");
-            gap_Data.notesAdd("");
-            gap_Data.notesAdd("");
-            gap_Data.notesAdd("");
+            gap_Data.notesAdd("","Pag1");
+            gap_Data.notesAdd("","Pag2");
+            gap_Data.notesAdd("","Pag3");
+            gap_Data.notesAdd("","Pag4");
             GappMainWindow w(&gap_Data,&gap_settings);
             w.updateGUI();
             w.show();

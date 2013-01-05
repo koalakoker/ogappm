@@ -25,6 +25,7 @@ GappMainWindow::GappMainWindow(GAPP_Data* pData, GSettings* pSettings, QWidget *
     ui->setupUi(this);
     ui->testo1->setFocus();
     connect(ui->noteTab, SIGNAL(tabCloseRequested(int)), this, SLOT(deleteNote(int)));
+    connect(ui->noteTab,SIGNAL(tabMoved(int,int)),this,SLOT(noteMoved(int,int)));
     m_strToBeFind.clear();
 
     resize(QSize(800, 600));
@@ -130,7 +131,8 @@ void GappMainWindow::updateGUI()
         QString out;
         out.sprintf("Pag%d",nextPage);
 
-        ui->noteTab->addTab(newPag, out);
+        int index = ui->noteTab->addTab(newPag, out);
+        p_data->setNotesTitle(index,out);
     }
     ui->noteTab->setCurrentIndex(0);
 
@@ -169,12 +171,13 @@ void GappMainWindow::updateData()
     int i, c = ui->noteTab->count();
     for (i = 0; i < c; i++)
     {
+        QString noteTitle = ui->noteTab->tabText(i);
         QWidget* pag = ui->noteTab->widget(i);
         QGridLayout* lay = (QGridLayout*)pag->layout();
         QLayoutItem* layItem = lay->itemAtPosition(0,0);
         QMyPlainTextEdit* txtNote = (QMyPlainTextEdit*)layItem->widget();
         QString txt = txtNote->toPlainText();
-        p_data->notesAdd(txt);
+        p_data->notesAdd(txt,noteTitle);
     }
 }
 
@@ -188,6 +191,11 @@ void GappMainWindow::deleteNote(int index)
 void GappMainWindow::noteIndexHasChanged(int sel)
 {
     ui->noteTab->setCurrentIndex(sel);
+}
+
+void GappMainWindow::noteMoved(int from, int to)
+{
+    updateData();
 }
 
 void GappMainWindow::AfxInfoBox(QString txt)
@@ -259,10 +267,10 @@ void GappMainWindow::on_action_Open_activated()
             {
                 // Set default 4 page empty
                 p_data->notesRemoveAll();
-                p_data->notesAdd("");
-                p_data->notesAdd("");
-                p_data->notesAdd("");
-                p_data->notesAdd("");
+                p_data->notesAdd("","Pag1");
+                p_data->notesAdd("","Pag2");
+                p_data->notesAdd("","Pag3");
+                p_data->notesAdd("","Pag4");
                 updateGUI();
             }
             break;
@@ -313,7 +321,8 @@ void GappMainWindow::on_actionGo_Next_or_create_new_activated()
         QString out;
         out.sprintf("Pag%d",nextPage);
 
-        ui->noteTab->addTab(newPag, out);
+        int index = ui->noteTab->addTab(newPag, out);
+        p_data->setNotesTitle(index,out);
         ui->noteTab->setCurrentIndex(ui->noteTab->currentIndex()+1);
 
         updateData();
@@ -369,10 +378,10 @@ void GappMainWindow::on_action_New_activated()
         QStringList fileName = fileDiag->selectedFiles();
         p_data->notesRemoveAll();
         // Set default 4 page empty
-        p_data->notesAdd("");
-        p_data->notesAdd("");
-        p_data->notesAdd("");
-        p_data->notesAdd("");
+        p_data->notesAdd("","Pag1");
+        p_data->notesAdd("","Pag2");
+        p_data->notesAdd("","Pag3");
+        p_data->notesAdd("","Pag4");
         p_data->setFileName(fileName[0]);
         p_data->setPass("");
         updateGUI();
@@ -421,7 +430,7 @@ void GappMainWindow::on_actionGet_notes_from_file_activated()
                     {
                         if (noteMatchList[i])
                         {
-                            p_data->notesAdd(noteToBeImported.notesAt(i));
+                            p_data->notesAdd(noteToBeImported.notesAt(i),"");
                         }
                     }
                     updateGUI();
@@ -545,3 +554,4 @@ void GappMainWindow::on_actionQuit_activated()
 {
     close();
 }
+

@@ -64,17 +64,15 @@ QString GAPP_Data::notesAt(int i)
 
 void GAPP_Data::notesRemoveAll()
 {
-	int i, c = m_notes.count();
-	for (i = 0; i < c; i++)
-	{
-		m_notes.removeAt(0);
-	}
+    m_notes.clear();
+    m_notesTitle.clear();
     m_hasModified = true;
 }
 
-void GAPP_Data::notesAdd(QString str)
+void GAPP_Data::notesAdd(QString str,QString title)
 {
 	m_notes.append(str);
+    m_notesTitle.append(title);
     m_hasModified = true;
 }
 
@@ -501,6 +499,7 @@ void GAPP_Data::FindInNotes(QStringList* resultStrList, QList<int>* noteSelected
     for (i = 0; i < m_notes.count(); i++)
     {
         QString note = m_notes.at(i);
+        QString noteTitle = notesTitle(i);
         QStringList noteRows = note.split("\n");
         int j;
         int numFindRequired = 1;
@@ -510,7 +509,7 @@ void GAPP_Data::FindInNotes(QStringList* resultStrList, QList<int>* noteSelected
             if (row.contains(strToBefind))
             {
                 QString resultStr;
-                resultStr.sprintf("Pag%d - ",i);
+                resultStr.sprintf("%s - ",noteTitle.toAscii().data());
                 resultStr.append(row);
                 resultStrList->append(resultStr);
                 noteSelectedList->append(i);
@@ -522,4 +521,30 @@ void GAPP_Data::FindInNotes(QStringList* resultStrList, QList<int>* noteSelected
             }
         }
     }
+}
+
+QString GAPP_Data::notesTitle(int index)
+{
+    QString retVal = "";
+    if ((index >= 0) && (index < m_notesTitle.count()))
+    {
+        retVal = m_notesTitle[index];
+    }
+    return retVal;
+}
+
+bool GAPP_Data::setNotesTitle(int index,QString title)
+{
+    bool retVal = false;
+    if ((index >= 0) && (index < m_notesTitle.count()))
+    {
+        GAPP_Data::m_notesTitle[index] = title;
+        retVal = true;
+    }
+    if (index == m_notesTitle.count())
+    {
+        m_notesTitle.append(title);
+        retVal = true;
+    }
+    return retVal;
 }

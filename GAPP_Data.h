@@ -38,7 +38,7 @@ public:
 	int notesCount();
 	QString notesAt(int i);
 	void notesRemoveAll();
-	void notesAdd(QString str);
+    void notesAdd(QString str, QString title);
 
 	void setPass(QString str);
 	QString Pass(void);
@@ -51,10 +51,14 @@ public:
 
     void FindInNotes(QStringList* resultStrList, QList<int>* noteSelectedList, QList<int>* numFindRequiredList, const QString& strToBefind);
 
+    QString notesTitle(int index);
+    bool setNotesTitle(int index,QString title);
+
 	// Debug
 	void AfxMessageBox(QString txt);
 
 private:
+    QStringList m_notesTitle;
 	QStringList m_notes;
     QStringList m_notesCripted;
 

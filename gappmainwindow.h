@@ -29,6 +29,7 @@ public:
 public slots:
     void deleteNote(int index);   
     void noteIndexHasChanged(int sel);
+    void noteMoved(int from, int to);
 
 private slots:
     void on_action_Open_activated();

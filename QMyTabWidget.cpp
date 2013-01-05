@@ -11,17 +11,23 @@
 #include <QUrl>
 #include <QDropEvent>
 #include <QGridLayout>
+#include <QTabBar>
 #include "QMyTabWidget.h"
 #include "QMyPlainTextEdit.h"
 
 QMyTabWidget::QMyTabWidget(QWidget *parent)
-: QTabWidget(parent){
-	// TODO Auto-generated constructor stub
-
+: QTabWidget(parent)
+{
+    connect(tabBar(),SIGNAL(tabMoved(int,int)),this,SLOT(moveTab(int,int)));
 }
 
 QMyTabWidget::~QMyTabWidget() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
+}
+
+void QMyTabWidget::moveTab(int from, int to)
+{
+    emit tabMoved(from,to);
 }
 
 void QMyTabWidget::dropEvent(QDropEvent * event)

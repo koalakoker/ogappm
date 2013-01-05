@@ -11,16 +11,23 @@
 #define QMYTABWIDGET_H_
 
 class QMyTabWidget :  public QTabWidget {
+    Q_OBJECT
 public:
-	QMyTabWidget(QWidget *parent = 0);
-	virtual ~QMyTabWidget();
+    explicit QMyTabWidget(QWidget *parent = 0);
+    ~QMyTabWidget();
 
 	int NextNewPag(void);
+
+signals:
+    void tabMoved(int from, int to);
 
 protected:
     void dropEvent ( QDropEvent * event );
     void dragEnterEvent ( QDragEnterEvent * event );
     void dragMoveEvent ( QDragMoveEvent * event );
+
+private slots:
+    void moveTab(int from, int to);
 };
 
 #endif /* QMYTABWIDGET_H_ */
