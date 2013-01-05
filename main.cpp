@@ -40,7 +40,15 @@ int main(int argc, char *argv[])
     qtTranslator.load(QString("qt_")+gap_settings.Get(GSETTING_LANGUAGE_CFGSTR)->Value().toString(),":/OGapp/set1");
     a.installTranslator(&qtTranslator);
 
-    QString file(gap_settings.Get(GSETTING_DEFNOTEFILE_CFGSTR)->Value().toString());
+    QString file;
+    if (argc == 1)
+    {
+        file = QString(gap_settings.Get(GSETTING_DEFNOTEFILE_CFGSTR)->Value().toString());
+    }
+    else
+    {
+        file = QString(argv[1]);
+    }
     int update;
     do
     {

@@ -5,6 +5,7 @@ Change and bug fixing
 - Note find: Fixed bug in search result, the correct page numbers is now displayed
 - Note find: Fixed bug that crash the application if OK button is pressed before to select on result
 - In the pop-up message box that appears on exit, if autosave is disabled, Cancel button has been added to skip the closing of the program.
+- OGapp can be run without argument in this case the default opg file is open. If it is run with argument the argument will be the path to the opened file (This is the usual behaviour to work with double click or open with feature of the operating system)
 
 OGapp release v1.2.0
 
