@@ -3,7 +3,8 @@ OGapp release v1.2.1
 Change and bug fixing
 - Added "Quit" action in the File menu
 - Note find: Fixed bug in search result, the correct page numbers is now displayed
-- Note find: Fixed bug that crash the application if OK button is pressed before to select on result 
+- Note find: Fixed bug that crash the application if OK button is pressed before to select on result
+- In the pop-up message box that appears on exit, if autosave is disabled, Cancel button has been added to skip the closing of the program.
 
 OGapp release v1.2.0
 

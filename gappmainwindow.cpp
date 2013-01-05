@@ -75,28 +75,45 @@ GappMainWindow::~GappMainWindow()
 
 void GappMainWindow::closeEvent(QCloseEvent* event)
 {
-    updateData();
-    bool saveIt = false;
-    if (!p_settings->Get(GSETTING_AUTOSAVE_CFGSTR)->Value().toBool())
+    if (p_data->HasModified())
     {
-        QMessageBox msg;
-        msg.setText(tr("Do you want to save the notes into the file?"));
-        msg.setIcon(QMessageBox::Question);
-        msg.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
-        if (msg.exec() == QMessageBox::Yes)
+        updateData();
+        bool saveIt = false;
+        bool exit = true;
+        if (!p_settings->Get(GSETTING_AUTOSAVE_CFGSTR)->Value().toBool())
+        {
+            QMessageBox msg;
+            msg.setText(tr("Do you want to save the notes into the file?"));
+            msg.setIcon(QMessageBox::Question);
+            msg.setStandardButtons(QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
+            msg.setDefaultButton(QMessageBox::Yes);
+            int retVal = msg.exec();
+            if (retVal == QMessageBox::Yes)
+            {
+                saveIt = true;
+            }
+            if (retVal == QMessageBox::Cancel)
+            {
+                exit = false;
+            }
+        }
+        else
         {
             saveIt = true;
         }
+        if (saveIt)
+        {
+            p_data->saveData();
+        }
+        if (exit)
+            event->accept();
+        else
+            event->ignore();
     }
     else
     {
-        saveIt = true;
+        event->accept();
     }
-    if (saveIt)
-    {
-        p_data->saveData();
-    }
-    event->accept();
 }
 
 void GappMainWindow::updateGUI()
@@ -196,6 +213,7 @@ void GappMainWindow::noteIndexHasChanged(int sel)
 void GappMainWindow::noteMoved(int from, int to)
 {
     updateData();
+    updateTitle();
 }
 
 void GappMainWindow::AfxInfoBox(QString txt)
