@@ -62,3 +62,14 @@ RESOURCES += OGappResources.qrc \
 RC_FILE = gapp.rc
 TRANSLATIONS += OGapp_it_IT.ts \
     qt_it_IT.ts
+
+target.path += /usr/bin
+INSTALLS += target
+
+iconfile.files += OGapp.png
+iconfile.path = /usr/share/pixmaps/
+INSTALLS += iconfile
+
+launcher.files += OGapp.desktop
+launcher.path = /usr/share/applications/
+INSTALLS += launcher
