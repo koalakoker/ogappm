@@ -1,5 +1,5 @@
 Source: ogapp
-Section: unknown
+Section: utils
 Priority: optional
 Maintainer: Gianluigi Forte <koala@koalakoker.com>
 Build-Depends: debhelper (>= 8.0.0)
