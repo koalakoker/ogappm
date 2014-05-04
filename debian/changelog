@@ -1,0 +1,5 @@
+ogapp (1.2-0ubuntu1) trusty; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Gianluigi Forte <koala@koalakoker.com>  Sun, 04 May 2014 10:59:42 +0200
