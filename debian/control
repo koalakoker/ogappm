@@ -2,13 +2,11 @@ Source: ogapp
 Section: utils
 Priority: optional
 Maintainer: Gianluigi Forte <koala@koalakoker.com>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), libqt4-dev
 Standards-Version: 3.9.4
 Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: git://git.debian.org/collab-maint/ogapp.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/ogapp.git;a=summary
 
 Package: ogapp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: OGapp notes
+Description: OGapp is a slim sized and fast program to manage your textual notes.
