@@ -576,3 +576,8 @@ void GappMainWindow::on_actionQuit_activated()
     close();
 }
 
+
+void GappMainWindow::on_action_Open_triggered()
+{
+    on_action_Open_activated();
+}

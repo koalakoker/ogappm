@@ -49,7 +49,7 @@ bool writeQString(QFile* file, QString str)
 //	AfxMessageBox(out);
 	if (!writeInt(file, size))
 		return false;
-	if (file->write(str.toAscii(),size) < size)
+    if (file->write(str.toLatin1(),size) < size)
 		return false;
 	else
 		return true;
@@ -70,7 +70,7 @@ QString readQString(QFile* file,bool* retVal)
 	char* buff = (char*)malloc(size + 1);
 	if (file->read(buff,size) < size)
 	{
-		retVal = false;
+        *retVal = false;
 		return QString("");
 	}
 	buff[size]=0;

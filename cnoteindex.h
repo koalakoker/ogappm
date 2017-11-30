@@ -1,7 +1,7 @@
 #ifndef CNOTEINDEX_H
 #define CNOTEINDEX_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 #include "ui_cnoteindex.h"
 
 class CNoteIndex : public QDialog

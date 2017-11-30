@@ -112,7 +112,7 @@ void GAPP_Data::GCriptAppunti(const char* command)
 		unsigned int j;
 		for (j = 0; j < n; j++)
 		{
-			buffer[j]=app.at(j).toAscii();
+            buffer[j]=app.at(j).toLatin1();
 		}
 		GCrypt(command,buffer,n);
 		for (j = 0; j < n; j++)
@@ -219,10 +219,10 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                                             {
                                                 unsigned int H1,L1;
                                                 m_pass=diag.m_pass();
-                                                GHashPass((const unsigned char*)m_pass.toAscii().constData(),m_pass.length(),&H1,&L1);
+                                                GHashPass((const unsigned char*)m_pass.toLatin1().constData(),m_pass.length(),&H1,&L1);
                                                 if ((H1==H) && (L1==L))
                                                 {
-                                                    GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
+                                                    GCrypt_Initialize(m_pass.toLatin1().constData(),m_pass.length()); // To initialize GCrypt
                                                     GCriptAppunti("d");
                                                     m_fileName = fileName;
                                                     m_hasModified = false;
@@ -264,7 +264,7 @@ bool GAPP_Data::LoadData(QString fileName,int* retVal)
                         {
                             AfxMessageBox(tr("File is not supported"));
                             *retVal = ERROR_FILE_NOT_VALID;
-                            retVal = false;
+                            //retVal = false;
                         }
                         break;
                     }
@@ -356,10 +356,10 @@ bool GAPP_Data::LoadDataOffline(QString fileName,int* retVal,QString userPass)
                                             {
                                                 unsigned int H1,L1;
                                                 m_pass=userPass;
-                                                GHashPass((const unsigned char*)m_pass.toAscii().constData(),m_pass.length(),&H1,&L1);
+                                                GHashPass((const unsigned char*)m_pass.toLatin1().constData(),m_pass.length(),&H1,&L1);
                                                 if ((H1==H) && (L1==L))
                                                 {
-                                                    GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
+                                                    GCrypt_Initialize(m_pass.toLatin1().constData(),m_pass.length()); // To initialize GCrypt
                                                     GCriptAppunti("d");
                                                     m_fileName = fileName;
                                                     m_hasModified = false;
@@ -392,7 +392,7 @@ bool GAPP_Data::LoadDataOffline(QString fileName,int* retVal,QString userPass)
                     default:
                         {
                             *retVal = ERROR_FILE_NOT_VALID;
-                            retVal = false;
+                            //retVal = false;
                         }
                         break;
                     }
@@ -420,8 +420,8 @@ bool GAPP_Data::saveData(void)
 	if (m_pass!="")
 	{
 		unsigned int H,L;
-		GHashPass((const unsigned char*)m_pass.toAscii().constData(),m_pass.length(),&H,&L);
-		GCrypt_Initialize(m_pass.toAscii().constData(),m_pass.length()); // To initialize GCrypt
+        GHashPass((const unsigned char*)m_pass.toLatin1().constData(),m_pass.length(),&H,&L);
+        GCrypt_Initialize(m_pass.toLatin1().constData(),m_pass.length()); // To initialize GCrypt
 		GCriptAppunti("c");
 
 		writeInt(&file,H);
@@ -509,7 +509,7 @@ void GAPP_Data::FindInNotes(QStringList* resultStrList, QList<int>* noteSelected
             if (row.contains(strToBefind))
             {
                 QString resultStr;
-                resultStr.sprintf("%s - ",noteTitle.toAscii().data());
+                resultStr.sprintf("%s - ",noteTitle.toLatin1().data());
                 resultStr.append(row);
                 resultStrList->append(resultStr);
                 noteSelectedList->append(i);

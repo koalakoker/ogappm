@@ -50,6 +50,8 @@ private slots:
 
     void on_actionQuit_activated();
 
+    void on_action_Open_triggered();
+
 private:
     Ui::GappMainWindow *ui;
 

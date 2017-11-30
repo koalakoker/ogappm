@@ -1,7 +1,7 @@
 #ifndef CHANGEPASSWORDDIAG_H
 #define CHANGEPASSWORDDIAG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 #include "ui_ChangePasswordDiag.h"
 
 class ChangePasswordDiag : public QDialog

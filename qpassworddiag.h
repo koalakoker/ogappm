@@ -1,7 +1,7 @@
 #ifndef QPASSWORDDIAG_H
 #define QPASSWORDDIAG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 #include "ui_qpassworddiag.h"
 
 #define QPASSDLG_NEWFILE 2

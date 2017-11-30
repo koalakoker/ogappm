@@ -2,7 +2,8 @@ TEMPLATE = app
 TARGET = OGapp
 QT += core \
     gui \
-    xml
+    xml \
+    widgets
 HEADERS += \
     ChangePasswordDiag.h \
     QMyFileFunctions.h \
