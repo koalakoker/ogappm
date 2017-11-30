@@ -222,7 +222,7 @@ void GappMainWindow::AfxInfoBox(QString txt)
     errMsg->exec();
 }
 
-void GappMainWindow::on_action_Open_activated()
+void GappMainWindow::on_action_Open_triggered()
 {
     QMyFileDialog* fileDiag = new QMyFileDialog(this,tr("Open .ogp file"),"","*.ogp");
     if (fileDiag->exec())
@@ -302,7 +302,7 @@ void GappMainWindow::on_action_Open_activated()
     delete fileDiag;
 }
 
-void GappMainWindow::on_action_About_activated()
+void GappMainWindow::on_action_About_triggered()
 {
     AboutDialog aboutDlg;
     QString title(tr("Open GAPP version "));
@@ -313,7 +313,7 @@ void GappMainWindow::on_action_About_activated()
     aboutDlg.exec();
 }
 
-void GappMainWindow::on_actionGo_Next_or_create_new_activated()
+void GappMainWindow::on_actionGo_Next_or_create_new_triggered()
 {
     int nextPage = ui->noteTab->currentIndex() + 1;
     if (nextPage < ui->noteTab->count())
@@ -348,12 +348,12 @@ void GappMainWindow::on_actionGo_Next_or_create_new_activated()
     }
 }
 
-void GappMainWindow::on_actionGo_Previous_activated()
+void GappMainWindow::on_actionGo_Previous_triggered()
 {
     ui->noteTab->setCurrentIndex(ui->noteTab->currentIndex()-1);
 }
 
-void GappMainWindow::on_action_Set_or_change_password_activated()
+void GappMainWindow::on_action_Set_or_change_password_triggered()
 {
     ChangePasswordDiag diag;
     diag.setOldPassword(p_data->Pass());
@@ -365,7 +365,7 @@ void GappMainWindow::on_action_Set_or_change_password_activated()
     }
 }
 
-void GappMainWindow::on_actionShow_index_activated()
+void GappMainWindow::on_actionShow_index_triggered()
 {
     CNoteIndex diag;
     int i;
@@ -383,7 +383,7 @@ void GappMainWindow::on_actionShow_index_activated()
     diag.exec();
 }
 
-void GappMainWindow::on_action_New_activated()
+void GappMainWindow::on_action_New_triggered()
 {
     // Autosave
     updateData();
@@ -407,7 +407,7 @@ void GappMainWindow::on_action_New_activated()
     delete fileDiag;
 }
 
-void GappMainWindow::on_actionGet_notes_from_file_activated()
+void GappMainWindow::on_actionGet_notes_from_file_triggered()
 {
     QMyFileDialog* fileDiag = new QMyFileDialog(this,tr("Open .ogp file"),"","*.ogp");
     if (fileDiag->exec())
@@ -466,14 +466,14 @@ void GappMainWindow::on_actionGet_notes_from_file_activated()
     delete fileDiag;
 }
 
-void GappMainWindow::on_action_Save_activated()
+void GappMainWindow::on_action_Save_triggered()
 {
     updateData();
     p_data->saveData();
     updateTitle();
 }
 
-void GappMainWindow::on_actionS_ave_AS_activated()
+void GappMainWindow::on_actionS_ave_AS_triggered()
 {
     QMyFileDialog* fileDiag = new QMyFileDialog(this,tr("SaveAs .ogp file"),"","*.ogp");
     fileDiag->setAcceptMode(QFileDialog::AcceptSave);
@@ -495,7 +495,7 @@ void GappMainWindow::noteTextChanged()
     updateTitle();
 }
 
-void GappMainWindow::on_action_Find_activated()
+void GappMainWindow::on_action_Find_triggered()
 {
     FindDialog dlg;
     // Init
@@ -525,7 +525,7 @@ void GappMainWindow::on_action_Find_activated()
     }
 }
 
-void GappMainWindow::on_actionF_ind_next_activated()
+void GappMainWindow::on_actionF_ind_next_triggered()
 {
     QWidget* pag = ui->noteTab->currentWidget();
     QGridLayout* lay = (QGridLayout*)pag->layout();
@@ -562,7 +562,7 @@ void GappMainWindow::writeWindowsSettings()
      settings.endGroup();
  }
 
-void GappMainWindow::on_action_Preference_activated()
+void GappMainWindow::on_action_Preference_triggered()
 {
     PreferencesDIalog dlg(p_settings);
     if (dlg.exec())
@@ -571,13 +571,7 @@ void GappMainWindow::on_action_Preference_activated()
     }
 }
 
-void GappMainWindow::on_actionQuit_activated()
+void GappMainWindow::on_actionQuit_triggered()
 {
     close();
-}
-
-
-void GappMainWindow::on_action_Open_triggered()
-{
-    on_action_Open_activated();
 }

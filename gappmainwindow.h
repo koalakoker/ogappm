@@ -32,25 +32,22 @@ public slots:
     void noteMoved(int from, int to);
 
 private slots:
-    void on_action_Open_activated();
-    void on_action_Save_activated();
-    void on_action_About_activated();
-    void on_actionGo_Next_or_create_new_activated();
-    void on_actionGo_Previous_activated();
-    void on_action_Set_or_change_password_activated();
-    void on_actionShow_index_activated();
-    void on_action_New_activated();
-    void on_actionGet_notes_from_file_activated();
-    void on_actionS_ave_AS_activated();
-    void on_action_Find_activated();
-    void on_actionF_ind_next_activated();
-    void on_action_Preference_activated();
+    void on_action_Open_triggered();
+    void on_action_Save_triggered();
+    void on_action_About_triggered();
+    void on_actionGo_Next_or_create_new_triggered();
+    void on_actionGo_Previous_triggered();
+    void on_action_Set_or_change_password_triggered();
+    void on_actionShow_index_triggered();
+    void on_action_New_triggered();
+    void on_actionGet_notes_from_file_triggered();
+    void on_actionS_ave_AS_triggered();
+    void on_action_Find_triggered();
+    void on_actionF_ind_next_triggered();
+    void on_action_Preference_triggered();
+    void on_actionQuit_triggered();
 
     void noteTextChanged();
-
-    void on_actionQuit_activated();
-
-    void on_action_Open_triggered();
 
 private:
     Ui::GappMainWindow *ui;
