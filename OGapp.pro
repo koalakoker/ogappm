@@ -26,7 +26,8 @@ HEADERS += \
     GSettings.h \
     GSettingDefines.h \
     TipsDialog.h \
-    Tips.h
+    Tips.h \
+    QMyLineEdit.h
 SOURCES += \
     ChangePasswordDiag.cpp \
     QMyFileFunctions.cpp \
@@ -47,7 +48,8 @@ SOURCES += \
     GSettingsItem.cpp \
     GSettings.cpp \
     TipsDialog.cpp \
-    Tips.cpp
+    Tips.cpp \
+    QMyLineEdit.cpp
 FORMS += \
     ChangePasswordDiag.ui \
     qpassworddiag.ui \

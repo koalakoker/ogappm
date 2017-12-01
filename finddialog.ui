@@ -28,7 +28,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="stringToBeFound"/>
+    <widget class="QMyLineEdit" name="stringToBeFound"/>
    </item>
    <item>
     <widget class="QLabel" name="label_2">
@@ -52,6 +52,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">qmylineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
