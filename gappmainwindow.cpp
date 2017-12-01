@@ -497,10 +497,7 @@ void GappMainWindow::noteTextChanged()
 
 void GappMainWindow::on_action_Find_triggered()
 {
-    FindDialog dlg;
-    // Init
-    dlg.SetData(p_data);
-    dlg.SetStrToBeFind(m_strToBeFind);
+    FindDialog dlg(p_data, m_strToBeFind);
     if (dlg.exec())
     {
         // Go to finded note

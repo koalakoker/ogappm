@@ -13,18 +13,15 @@ class FindDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit FindDialog(QWidget *parent = 0);
+    explicit FindDialog(GAPP_Data* data, QString strToBeFind, QWidget *parent = 0);
     ~FindDialog();
 
-    void SetData(GAPP_Data* data) {m_data = data;};
-    int noteSelected(){return m_noteSelected;};
-    int numFindRequired(){return m_numFindRequired;};
-    QString strToBeFind(){return m_strToBeFind;};
-    void SetStrToBeFind(QString strToBeFind);
+    int noteSelected(){return m_noteSelected;}
+    int numFindRequired(){return m_numFindRequired;}
+    QString strToBeFind(){return m_strToBeFind;}
 
 private slots:
     void on_stringToBeFound_textChanged(const QString &arg1);
-
     void on_searchResults_currentRowChanged(int currentRow);
 
 private:

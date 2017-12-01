@@ -495,29 +495,26 @@ void GAPP_Data::FindInNotes(QStringList* resultStrList, QList<int>* noteSelected
     resultStrList->clear();
     noteSelectedList->clear();
     numFindRequiredList->clear();
-    int i;
-    for (i = 0; i < m_notes.count(); i++)
+    for (int i = 0; i < m_notes.count(); i++)
     {
         QString note = m_notes.at(i);
         QString noteTitle = notesTitle(i);
         QStringList noteRows = note.split("\n");
-        int j;
         int numFindRequired = 1;
-        for (j = 0; j < noteRows.count(); j++)
+        foreach (QString row, noteRows)
         {
-            QString row = noteRows.at(j);
-            if (row.contains(strToBefind))
+            Qt::CaseSensitivity cs = Qt::CaseInsensitive; // Future improvement: it can be user selectable
+            if (row.contains(strToBefind, cs))
             {
-                QString resultStr;
-                resultStr.sprintf("%s - ",noteTitle.toLatin1().data());
-                resultStr.append(row);
+                QString resultStr = QString("%1 - %2").arg(noteTitle).arg(row);
                 resultStrList->append(resultStr);
                 noteSelectedList->append(i);
                 numFindRequiredList->append(numFindRequired);
+
                 QString tstStr = "@#GAP_BEGIN#@";
                 tstStr.append(row);
                 tstStr.append("@#GAP_END#@");
-                numFindRequired += tstStr.split(strToBefind).count()-1;
+                numFindRequired += tstStr.split(strToBefind, QString::KeepEmptyParts, cs).count()-1;
             }
         }
     }
