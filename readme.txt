@@ -1,3 +1,6 @@
+OGapp release v1.2.2
+- Improvement of the search functionality
+
 OGapp release v1.2.1
 
 Change and bug fixing
