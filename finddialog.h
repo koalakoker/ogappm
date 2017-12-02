@@ -23,7 +23,8 @@ public:
 private slots:
     void on_stringToBeFound_textChanged(const QString &arg1);
     void on_searchResults_currentRowChanged(int currentRow);
-    void on_receiveKeyPress(int key);
+    void on_stringToBeFound_receiveKeyPress(int key);
+    void on_searchResults_receiveKeyPress(int key);
 
 private:
     Ui::FindDialog *ui;

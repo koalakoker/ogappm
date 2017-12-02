@@ -1,7 +1,5 @@
 #include "finddialog.h"
 #include "ui_finddialog.h"
-#warning "TBD"
-#include <QDebug>
 
 FindDialog::FindDialog(GAPP_Data* data, QString strToBeFind, QWidget *parent) :
     QDialog(parent),
@@ -13,7 +11,9 @@ FindDialog::FindDialog(GAPP_Data* data, QString strToBeFind, QWidget *parent) :
     ui->stringToBeFound->setText(strToBeFind);
 
     connect (ui->stringToBeFound, SIGNAL(keyPressed(int)),
-             this, SLOT(on_receiveKeyPress(int)));
+             this, SLOT(on_stringToBeFound_receiveKeyPress(int)));
+    connect (ui->searchResults, SIGNAL(keyPressed(int)),
+             this, SLOT(on_searchResults_receiveKeyPress(int)));
 }
 
 FindDialog::~FindDialog()
@@ -41,7 +41,7 @@ void FindDialog::on_searchResults_currentRowChanged(int currentRow)
     }
 }
 
-void FindDialog::on_receiveKeyPress(int key)
+void FindDialog::on_stringToBeFound_receiveKeyPress(int key)
 {
     if (key == Qt::Key_Down)
     {
@@ -49,6 +49,17 @@ void FindDialog::on_receiveKeyPress(int key)
         {
             ui->searchResults->setFocus();
             ui->searchResults->setCurrentRow(0);
+        }
+    }
+}
+
+void FindDialog::on_searchResults_receiveKeyPress(int key)
+{
+    if (key == Qt::Key_Up)
+    {
+        if (ui->searchResults->currentRow() == 0)
+        {
+            ui->stringToBeFound->setFocus();
         }
     }
 }

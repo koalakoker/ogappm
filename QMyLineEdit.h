@@ -15,7 +15,6 @@ protected:
 signals:
     void keyPressed(int key);
 
-public slots:
 };
 
 #endif // QMYLINEEDIT_H

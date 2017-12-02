@@ -38,7 +38,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QListWidget" name="searchResults"/>
+    <widget class="QMyListWidget" name="searchResults"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -56,7 +56,12 @@
   <customwidget>
    <class>QMyLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">qmylineedit.h</header>
+   <header location="global">QMyLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QMyListWidget</class>
+   <extends>QListWidget</extends>
+   <header location="global">QMyListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
